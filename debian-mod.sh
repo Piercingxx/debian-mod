@@ -136,6 +136,20 @@ while true; do
                         ./gnome-customizations.sh
                         cd "$builddir" || exit
                 # Add in backgrounds and themes and apply them
+                    mkdir -p /home/"$username"/Pictures/backgrounds
+                    chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
+                    cp -Rf piercing-dots/backgrounds/* /home/"$username"/Pictures/backgrounds
+                    chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
+                    mkdir -p /home/"$username"/Pictures/profile-image
+                    chown -R "$username":"$username" /home/"$username"/Pictures/profile-image
+                    cp -Rf piercing-dots/profile-image/* /home/"$username"/Pictures/profile-image
+                    chown -R "$username":"$username" /home/"$username"/Pictures/profile-images
+                    cd "$builddir" || exit
+                # Copy Refs to Download folder
+                    mkdir -p /home/"$username"/Downloads/refs
+                    chown -R "$username":"$username" /home/"$username"/Downloads/refs
+                    cp -Rf piercing-dots/refs/* /home/"$username"/Downloads/refs
+                    chown -R "$username":"$username" /home/"$username"/Downloads/refs
                 rm -rf piercing-dots
             echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
             ;;
