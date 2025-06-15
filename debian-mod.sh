@@ -79,6 +79,13 @@ while true; do
                     flatpak update -y
                 else
                     echo "Flatpak is not installed."
+                    sudo agt install flatpak -y
+                    sudo apt install gnome-software-plugin-flatpak -y
+                    flatpak remote-add flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+                    apt update && upgrade -y
+                    apt full-upgrade -y
+                    sudo apt install -f
+                    flatpak update
                 fi
             wait
             echo -e "${GREEN}System Updated Successfully!${NC}"
