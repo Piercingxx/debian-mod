@@ -45,6 +45,7 @@ function menu() {
         --menu "Run Options In Order:" 0 0 0 \
         "Update System"                         "Update System" \
         "Install Gnome"                         "Installs Gnome Desktop & Dependencies" \
+        "Add Non-Free Repos"                    "Adds Non-Free Repositories"
         "Applications"                          "Install Applications and Utilities" \
         "Piercing Gimp"                         "Piercing Gimp Presets (Distro Agnostic)" \
         "Surface Kernel"                        "Install Surface Kernal" \
@@ -90,6 +91,7 @@ while true; do
                 cd "$builddir" || exit
             echo -e "${GREEN}Gnome Installed Successfully!${NC}"
             ;;
+            git
         "Applications")
             echo -e "${YELLOW}Installing Core Applications...${NC}"
                 cd scripts || exit
