@@ -15,17 +15,6 @@ fi
 
 apt install nala -y
 
-# Enables non-free repositories and adds them to the sources list.
-sudo rm /etc/apt/sources.list
-sudo touch /etc/apt/sources.list 
-sudo chmod +rwx /etc/apt/sources.list
-sudo printf "deb https://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
-deb http://security.debian.org/debian-security stable-security/updates main contrib non-free non-free-firmware
-deb https://deb.debian.org/debian/ stable-updates main contrib non-free non-free-firmware
-deb-src https://deb.debian.org/debian/ stable-updates main contrib non-free non-free-firmware" | sudo tee -a /etc/apt/sources.list
-
-sudo add-apt-repository ppa:graphics-drivers/ppa -y
-
 # Update packages list and update system
 echo "Updating with non-free drivers"
 sleep 2
