@@ -5,6 +5,7 @@
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
+sudo add-apt-repository universe 
 sudo apt update
 sudo apt upgrade -y
 
@@ -36,8 +37,8 @@ sudo apt install slurp -y
 sudo apt install cliphist -y
 
 # Bluetooth
-#sudo apt install bluez -y
-#sudo apt install blueman -y
+sudo apt install bluez -y
+sudo apt install blueman -y
 
 
 # Clone and build hyprlock
@@ -76,11 +77,3 @@ if git clone --recursive -b $idle_tag https://github.com/hyprwm/hypridle.git; th
 else
     echo -e "${ERROR} Download failed for hypridle." 2>&1 | tee -a "$LOG"
 fi
-
-
-# .config Dot Files
-    git clone https://github.com/Piercingxx/piercing-dots.git
-        chmod -R u+x piercing-dots
-        chown -R "$username":"$username" piercing-dots
-        cp -Rf "piercing-dots" /home/"$username"/.config/
-        chown "$username":"$username" -R /home/"$username"/.config/*

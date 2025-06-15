@@ -45,15 +45,15 @@ function menu() {
         --menu "Run Options In Order:" 0 0 0 \
         "Update System"                         "Update System" \
         "Install Gnome"                         "Installs Gnome Desktop & Dependencies" \
-        "Add Non-Free Repos"                    "Adds Non-Free Repositories"
+        "Debian Non-Free Repos"                 "Debian Only"\
         "Applications"                          "Install Applications and Utilities" \
-        "Piercing Gimp"                         "Piercing Gimp Presets (Distro Agnostic)" \
-        "Surface Kernel"                        "Install Surface Kernal" \
         "Nvidia Drivers"                        "Do not install if on Surface kernal" \
         "Testing"                               "Switches to Testing Branch" \
         "Hyprland"                              "This Will Install Hyprland & All Dependencies" \
         "PiercingXX Rice"                       "Apply Piercing Rice (Distro Agnostic)" \
+        "Piercing Gimp"                         "Piercing Gimp Presets (Distro Agnostic)" \
         "Beautiful Bash"                        "Chris Titus' Beautiful Bash Script" \
+        "Surface Kernel"                        "Microsoft Surface Kernal" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
 }
@@ -86,17 +86,24 @@ while true; do
         "Install Gnome")
             echo -e "${YELLOW}Installing Gnome...${NC}"
                 cd scripts || exit
-                chmod u+x 1.sh
-                sudo ./1.sh
+                chmod u+x gnomeinstall.sh
+                sudo ./gnomeinstall.sh
                 cd "$builddir" || exit
             echo -e "${GREEN}Gnome Installed Successfully!${NC}"
             ;;
-            git
+        "Add Non-Free Repos")
+            echo -e "${YELLOW}Adding Non-Free Repos...${NC}"
+                cd scripts || exit
+                chmod u+x repositories.sh
+                sudo ./respositories.sh
+                cd "$builddir" || exit
+                echo -e "${GREEN}Non Free Repos Added Successfully!${NC}"
+            ;;
         "Applications")
             echo -e "${YELLOW}Installing Core Applications...${NC}"
                 cd scripts || exit
-                chmod u+x 2.sh
-                sudo ./2.sh
+                chmod u+x apps.sh
+                sudo ./apps.sh
                 cd "$builddir" || exit
             echo -e "${GREEN}Core Apps Installed successfully!${NC}"
             ;;

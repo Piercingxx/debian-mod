@@ -13,26 +13,16 @@ if [[ -n "$(command -v nmcli)" && "$(nmcli -t -f STATE g)" != connected ]]; then
     exit
 fi
 
-apt install nala -y
-
-# Update packages list and update system
-echo "Updating with non-free drivers"
-sleep 2
 sudo apt update 
 sudo apt upgrade -y && echo "Upgrading"
 wait
 
-# Making dir
-echo "Adding directories"
-sleep 2
-cd "$builddir" || exit
-mkdir -p /home/"$username"/.fonts
-mkdir -p /var/lib/usbmux/.config
-
 
 echo "Install Essentials"
 sleep 2
-apt install wget gpg flatpak gnome-software-plugin-flatpak -y
+apt install wget gpg -y 
+agt install flatpak -y
+apt install gnome-software-plugin-flatpak -y
 flatpak remote-add flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 apt update && upgrade -y
 wait
@@ -193,10 +183,6 @@ sleep-inactive-battery-type='suspend'
 # Finalizing graphical login
 systemctl enable gdm
 systemctl enable gdm3 --now
-
-
-# Use nala
-bash scripts/usenala
 
 
 sudo apt update && upgrade -y

@@ -27,6 +27,12 @@ mkdir -p /home/"$username"/.icons
 chown -R "$username":"$username" /home/"$username"/.icons
 mkdir -p /home/"$username"/Pictures/backgrounds
 chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
+# Used for fstab
+mkdir -p /media/Working-Storage
+chown "$username":"$username" /home/"$username"/media/Archived-Storage
+mkdir -p /media/Archived-Storage
+chown "$username":"$username" /home/"$username"/media/Working-Storage
+
 
 # Installing important things && stuff && some dependencies
 echo "Installing Programs and Drivers"
@@ -69,6 +75,9 @@ flatpak install flathub com.mattjakeman.ExtensionManager -y
 flatpak install flathub org.qbittorrent.qBittorrent -y
 flatpak install flathub io.missioncenter.MissionCenter -y
 flatpak install flathub com.tomjwatson.Emote -y
+flatpak install flathub org.kde.kdenlive -y
+# Install Gnome-extensions-cli
+pipx install gnome-extensions-cli --system-site-packages
 
 # VSCode
 wget "https://vscode.download.prss.microsoft.com/dbazure/download/stable/e170252f762678dec6ca2cc69aba1570769a5d39/code_1.88.1-1712771838_amd64.deb"
@@ -82,12 +91,7 @@ wget "https://global.download.synology.com/download/Utility/SynologyDriveClient/
 wait
 sudo dpkg -i synology-drive-client-15724.x86_64.deb
 wait
-
-# Synology Chat
-wget "https://global.synologydownload.com/download/Utility/ChatClient/1.2.2-0222/Ubuntu/x86_64/Synology%20Chat%20Client-1.2.2-0222.deb"
-wait
-sudo dpkg --force-all -i Synology%20Chat%20Client-1.2.2-0222.deb
-wait
+rm synology-drive-client-15724.x86_64.deb
 
 # steam
 wget "https://steamcdn-a.akamaihd.net/client/installer/steam.deb"
@@ -119,11 +123,13 @@ chmod -R 777 Meslo.zip
 unzip Meslo.zip -d /home/"$username"/.fonts
 mv dotfonts/fontawesome/otfs/*.otf /home/"$username"/.fonts/
 chown -R "$username":"$username" /home/"$username"/.fonts
+rm -rf FiraCode.zip
+rm -rf Meslo.zip
 apt install fonts-font-awesome fonts-noto-color-emoji -y
 apt install ttf-mscorefonts-installer -y
 apt install fonts-terminus -y
 
-# Reloading Font
+# Reload Font
 fc-cache -vf
 wait
 
@@ -150,6 +156,7 @@ cd gnome-shell-extensions-useless-gaps || exit
 ./install.sh local-install
 # Just Perfection
 # Blur My Shell
+# Workspace Buttons With App Icons
 
 #Nautilus Customization
 sudo apt install gnome-sushi -y
@@ -164,15 +171,6 @@ glib-compile-schemas /usr/share/glib-2.0/schemas
 cd "$builddir" || exit
 rm -rf nautilus-open-any-terminal
 
-# Removing zip files and stuff
-rm -rf FiraCode.zip
-rm -rf Meslo.zip
-
-# Used for fstab
-mkdir -p /media/Working-Storage
-mkdir -p /media/Archived-Storage
-chown "$username":"$username" /home/"$username"/media/Archived-Storage
-chown "$username":"$username" /home/"$username"/media/Working-Storage
 
 sudo apt update && upgrade -y
 wait
@@ -188,7 +186,25 @@ sudo apt update && upgrade -y
 wait
 flatpak update -y
 
-read -r -p "2.sh complete. Reboot and run Steam, after you can install Nvidia drivers (Do not install Nvidia Proprietary Drivers if using the Surface Kernal)"
-
+# Synology Chat
+wget "https://global.synologydownload.com/download/Utility/ChatClient/1.2.2-0222/Ubuntu/x86_64/Synology%20Chat%20Client-1.2.2-0222.deb"
+wait
+sudo dpkg --force-all -i Synology\ Chat\ Client-1.2.2-0222.deb
+wait
+sudo mv /opt/Synology\ Chat /opt/SynologyChat
+sudo rm /etc/alternatives/synochat
+sudo ln -s /opt/SynologyChat/synochat /etc/alternatives/synochat
+sudo rm /usr/share/applications/synochat.desktop
+sudo touch /usr/share/applications/synochat.desktop
+sudo printf "[Desktop Entry]
+Name=Synology Chat
+Exec="/opt/SynologyChat/synochat" %%U
+Terminal=false
+Type=Application
+Icon=synochat
+StartupWMClass=SynologyChat
+Comment=Synology Chat Desktop Client
+Categories=Utility;" | sudo tee -a /usr/share/applications/synochat.desktop
+synochat
 
 
