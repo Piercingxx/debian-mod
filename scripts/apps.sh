@@ -4,8 +4,6 @@
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
-echo "Starting Script 2.sh"
-sleep 2
 
 # Checks for active network connection
 if [[ -n "$(command -v nmcli)" && "$(nmcli -t -f STATE g)" != connected ]]; then
@@ -63,7 +61,7 @@ sudo apt install curl -y
 sudo apt install gh -y
 sudo apt install lua5.4 -y
 sudo apt install gnome-disk-utility -y
-sleep 2
+wait
 flatpak install flathub net.waterfox.waterfox -y
 flatpak install flathub md.obsidian.Obsidian -y
 flatpak install flathub org.libreoffice.LibreOffice -y
