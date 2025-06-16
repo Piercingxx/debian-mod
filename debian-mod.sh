@@ -64,9 +64,17 @@ while true; do
     choice=$(menu)
     case $choice in
         "Update System")
-            apt update && upgrade -y
-            apt full-upgrade -y
-            sudo apt install -f
+            sudo apt update && upgrade -y
+wait
+sudo apt full-upgrade -y
+wait
+sudo apt install -f
+wait
+dpkg --configure -a
+sudo apt --fix-broken install
+wait
+sudo apt autoremove -y
+sudo apt update && upgrade -y
             echo -e "${YELLOW}Updating System...${NC}"
             # Check if nala is installed
                 if ! command_exists nala; then
