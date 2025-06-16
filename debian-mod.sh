@@ -48,7 +48,7 @@ function menu() {
         "Debian Non-Free Repos"                 "Debian Only"\
         "Applications"                          "Install Applications and Utilities" \
         "Nvidia Drivers"                        "Do not install if on Surface kernal" \
-        "Testing"                               "Switches to Testing Branch" \
+        "Testing"                               "Debian Only (you can not switch back)" \
         "Hyprland"                              "This Will Install Hyprland & All Dependencies" \
         "PiercingXX Rice"                       "Apply Piercing Rice (Distro Agnostic)" \
         "Piercing Gimp"                         "Piercing Gimp Presets (Distro Agnostic)" \
