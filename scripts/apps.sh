@@ -177,7 +177,7 @@ wait
 sudo apt install -f
 wait
 dpkg --configure -a
-sudo apt install --fix-broken
+sudo apt --fix-broken install
 wait
 sudo apt autoremove -y
 sudo apt update && upgrade -y
