@@ -60,11 +60,13 @@ function menu() {
 # Main menu loop
 while true; do
     clear
-    echo -e "${BLUE}PiercingXX's Arch Mod Script${NC}"
     echo -e "${GREEN}Welcome ${username}${NC}\n"
     choice=$(menu)
     case $choice in
         "Update System")
+            apt update && upgrade -y
+            apt full-upgrade -y
+            sudo apt install -f
             echo -e "${YELLOW}Updating System...${NC}"
             # Check if nala is installed
                 if ! command_exists nala; then
@@ -82,9 +84,6 @@ while true; do
                     sudo agt install flatpak -y
                     sudo apt install gnome-software-plugin-flatpak -y
                     flatpak remote-add flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-                    apt update && upgrade -y
-                    apt full-upgrade -y
-                    sudo apt install -f
                     flatpak update
                 fi
             wait
