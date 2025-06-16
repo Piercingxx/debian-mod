@@ -5,7 +5,7 @@
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
-sudo add-apt-repository universe 
+sudo add-apt-repository universe -y
 sudo apt update
 sudo apt upgrade -y
 
