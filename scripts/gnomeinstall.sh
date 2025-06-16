@@ -4,9 +4,6 @@
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
-echo "Starting Script 1.sh"
-sleep 2
-
 # Checks for active network connection
 if [[ -n "$(command -v nmcli)" && "$(nmcli -t -f STATE g)" != connected ]]; then
     awk '{print}' <<< "Network connectivity is required to continue."
@@ -19,7 +16,6 @@ wait
 
 
 echo "Install Essentials"
-sleep 2
 apt install wget gpg -y 
 agt install flatpak -y
 apt install gnome-software-plugin-flatpak -y
@@ -46,7 +42,6 @@ pipx install gnome-extensions-cli --system-site-packages
 
 
 echo "Changing Graphical Login"
-sleep 2
 # Enable graphical login and change target from CLI to GUI
 # First admend the .gdm3 to add Intall section
 sudo rm /lib/systemd/system/gdm3.service && sudo touch /lib/systemd/system/gdm3.service && sudo chmod +rwx /lib/systemd/system/gdm3.service && sudo printf "[Unit]
@@ -128,7 +123,6 @@ WantedBy=multi-user.target" | sudo tee -a /lib/systemd/system/gdm.service
 
 
 echo "Hello Handsome"
-sleep 2
 # Edit Graphical Login Settings
 sudo rm /etc/gdm3/greeter.dconf-defaults && sudo touch /etc/gdm3/greeter.dconf-defaults && sudo chmod +rwx /etc/gdm3/greeter.dconf-defaults && sudo printf "# These are the options for the greeter session that can be set 
 # through GSettings. Any GSettings setting that is used by the 
