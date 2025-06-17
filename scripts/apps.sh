@@ -89,6 +89,7 @@ wait
 sudo dpkg -i synology-drive-client-15724.x86_64.deb
 wait
 rm synology-drive-client-15724.x86_64.deb
+sudo apt --fix-broken install -y
 
 # steam
 wget "https://steamcdn-a.akamaihd.net/client/installer/steam.deb"
@@ -203,6 +204,3 @@ StartupWMClass=SynologyChat
 Comment=Synology Chat Desktop Client
 Categories=Utility;" | sudo tee -a /usr/share/applications/synochat.desktop
 synochat
-
-
-sudo apt --fix-broken install -y
