@@ -54,7 +54,6 @@ sudo apt install linux-headers-generic -y
 sudo apt install seahorse -y
 sudo apt install gnome-calculator -y
 sudo apt install rename -y
-sudo apt install neofetch -y
 sudo apt install mpv -y
 sudo apt install gparted -y
 sudo apt install curl -y
