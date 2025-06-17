@@ -176,7 +176,7 @@ sudo apt full-upgrade -y
 wait
 sudo apt install -f
 wait
-dpkg --configure -a
+sudo dpkg --configure -a
 sudo apt --fix-broken install
 wait
 sudo apt autoremove -y
@@ -206,3 +206,16 @@ Categories=Utility;" | sudo tee -a /usr/share/applications/synochat.desktop
 synochat
 
 
+sudo apt update && upgrade -y
+wait
+sudo apt full-upgrade -y
+wait
+sudo apt install -f
+wait
+sudo dpkg --configure -a
+sudo apt --fix-broken install
+wait
+sudo apt autoremove -y
+sudo apt update && upgrade -y
+wait
+flatpak update -y
