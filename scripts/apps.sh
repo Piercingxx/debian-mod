@@ -60,6 +60,7 @@ sudo apt install curl -y
 sudo apt install gh -y
 sudo apt install lua5.4 -y
 sudo apt install gnome-disk-utility -y
+sudo apt install papirus-icon-theme -y
 wait
 flatpak install flathub net.waterfox.waterfox -y
 flatpak install flathub md.obsidian.Obsidian -y
