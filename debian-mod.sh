@@ -70,7 +70,7 @@ while true; do
             wait
             sudo apt install -f
             wait
-            dpkg --configure -a
+            sudo dpkg --configure -a
             sudo apt --fix-broken install -y
             wait
             sudo apt autoremove -y
