@@ -74,6 +74,8 @@ flatpak install flathub org.qbittorrent.qBittorrent -y
 flatpak install flathub io.missioncenter.MissionCenter -y
 flatpak install flathub com.tomjwatson.Emote -y
 flatpak install flathub org.kde.kdenlive -y
+flatpak install flathub io.github.shiftey.Desktop -y
+
 # Install Gnome-extensions-cli
 pipx install gnome-extensions-cli --system-site-packages
 
@@ -102,8 +104,8 @@ rm steam.deb
 sudo dpkg --add-architecture i386
 
 # FlashForge
-# wget "https://en.fss.flashforge.com/10000/software/e02d016281d06012ea71a671d1e1fdb7.deb"
-# chown "$username":"$username" e02d016281d06012ea71a671d1e1fdb7.deb
+wget "https://en.fss.flashforge.com/10000/software/e02d016281d06012ea71a671d1e1fdb7.deb"
+chown "$username":"$username" e02d016281d06012ea71a671d1e1fdb7.deb
 
 sudo apt update
 wait
@@ -184,24 +186,3 @@ sudo apt autoremove -y
 sudo apt update && upgrade -y
 wait
 flatpak update -y
-
-# Synology Chat
-#wget "https://global.synologydownload.com/download/Utility/ChatClient/1.2.2-0222/Ubuntu/x86_64/Synology%20Chat%20Client-1.2.2-0222.deb"
-#wait
-#sudo dpkg --force-all -i Synology\ Chat\ Client-1.2.2-0222.deb
-#wait
-#sudo mv /opt/Synology\ Chat /opt/SynologyChat
-#sudo rm /etc/alternatives/synochat
-#sudo ln -s /opt/SynologyChat/synochat /etc/alternatives/synochat
-#sudo rm /usr/share/applications/synochat.desktop
-#sudo touch /usr/share/applications/synochat.desktop
-#sudo printf "[Desktop Entry]
-#Name=Synology Chat
-#Exec="/opt/SynologyChat/synochat" %%U
-#Terminal=false
-#Type=Application
-#Icon=synochat
-#StartupWMClass=SynologyChat
-#Comment=Synology Chat Desktop Client
-#Categories=Utility;" | sudo tee -a /usr/share/applications/synochat.desktop
-#synochat
