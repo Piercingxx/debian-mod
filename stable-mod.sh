@@ -128,7 +128,7 @@ while true; do
                     chmod -R u+x gimp-dots
                     chown -R "$username":"$username" gimp-dots
                     cd ./gimp-dots
-                    ./applydots
+                    ./gimp-mod.sh
                     cd "$builddir" || exit
                     echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
                 else
