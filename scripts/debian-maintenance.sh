@@ -8,17 +8,6 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# Checks for active network connection
-if [[ -n "$(command -v nmcli)" && "$(nmcli -t -f STATE g)" != connected ]]; then
-    awk '{print}' <<<"Network connectivity is required to continue."
-    exit
-fi
-
-# Install required tools for TUI
-if ! command -v whiptail &> /dev/null; then
-    echo -e "${YELLOW}Installing whiptail...${NC}"
-    pacman -S whiptail --noconfirm
-fi
 
 username=$(id -u -n 1000)
 builddir=$(pwd)

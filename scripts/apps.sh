@@ -1,5 +1,5 @@
 #!/bin/bash
-# https://github.com/Piercing666
+# https://github.com/PiercingXX
 
 username=$(id -u -n 1000)
 builddir=$(pwd)

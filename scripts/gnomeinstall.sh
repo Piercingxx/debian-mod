@@ -1,28 +1,18 @@
 #!/bin/bash
-# https://github.com/Piercing666
+# https://github.com/PiercingXX
 
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
-# Checks for active network connection
-if [[ -n "$(command -v nmcli)" && "$(nmcli -t -f STATE g)" != connected ]]; then
-    awk '{print}' <<< "Network connectivity is required to continue."
-    exit
-fi
-
-sudo apt update 
-sudo apt upgrade -y && echo "Upgrading"
-wait
-
 
 echo "Install Essentials"
-apt install wget gpg -y 
-agt install flatpak -y
-apt install gnome-software-plugin-flatpak -y
+sudo apt install wget gpg -y 
+sudo agt install flatpak -y
+sudo apt install gnome-software-plugin-flatpak -y
 flatpak remote-add flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-apt update && upgrade -y
+sudo apt update && upgrade -y
 wait
-apt full-upgrade -y
+sudo apt full-upgrade -y
 wait
 sudo apt install -f
 wait

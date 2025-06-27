@@ -1,8 +1,5 @@
 #!/bin/bash
-# https://github.com/Piercing666
-
-username=$(id -u -n 1000)
-builddir=$(pwd)
+# https://github.com/PiercingXX
 
 
 # Checks for active network connection
