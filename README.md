@@ -2,6 +2,8 @@
 This script will automate the install of a very vanilla Gnome Core and all the drivers fonts and programs that I use on my Daily Driver/Gaming rig/Tablets.
 This is divided into sections so you can install only what you need.
 
+- Trixie-Mod is my current go to. This setup is bleeding edge yet suprisingly stable. This is once again my favorite over arch.
+
 
 ### Notes:
 - I recommend an up-to-date copy of the netinst.iso from Debian's website.
