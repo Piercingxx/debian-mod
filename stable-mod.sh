@@ -127,13 +127,8 @@ while true; do
                 if git clone https://github.com/Piercingxx/gimp-dots.git; then
                     chmod -R u+x gimp-dots
                     chown -R "$username":"$username" gimp-dots
-                    sudo rm -Rf /home/"$username"/.var/app/org.gimp.GIMP/config/GIMP/*
-                    sudo rm -Rf /home/"$username"/.config/GIMP/*
-                    mkdir -p /home/"$username"/.config/GIMP/3.0
-                    chown -R "$username":"$username" /home/"$username"/.config/GIMP
-                    cd gimp-dots/Gimp || exit
-                    cp -Rf 3.0/* /home/"$username"/.config/GIMP/3.0
-                    chown "$username":"$username" -R /home/"$username"/.config/GIMP
+                    cd ./gimp-dots
+                    ./applydots
                     cd "$builddir" || exit
                     echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
                 else
