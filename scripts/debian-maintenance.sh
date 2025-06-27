@@ -8,14 +8,6 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# Function to cache sudo credentials
-cache_sudo_credentials() {
-    echo "Caching sudo credentials for script execution..."
-    sudo -v
-    # Keep sudo credentials fresh for the duration of the script
-    (while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &)
-}
-
 # Checks for active network connection
 if [[ -n "$(command -v nmcli)" && "$(nmcli -t -f STATE g)" != connected ]]; then
     awk '{print}' <<<"Network connectivity is required to continue."
@@ -25,14 +17,11 @@ fi
 # Install required tools for TUI
 if ! command -v whiptail &> /dev/null; then
     echo -e "${YELLOW}Installing whiptail...${NC}"
-    apt install whiptail -y
+    pacman -S whiptail --noconfirm
 fi
 
 username=$(id -u -n 1000)
 builddir=$(pwd)
-
-# Cache sudo credentials
-cache_sudo_credentials
 
 # Function to display a message box
 function msg_box() {
@@ -43,88 +32,65 @@ function msg_box() {
 function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
         --menu "Run Options In Order:" 0 0 0 \
-        "Step 1"                                "Update System" \
-        "Step 2"                                "Installs Gnome & Dependencies" \
-        "Step 3"                                "Install Applications, Utilities, & Rice" \
-        "Optional Nvidia Drivers"               "Do not install if on Surface kernal" \
-        "Optional Surface Kernel"               "Microsoft Surface Kernal" \
-        "Hyprland"                              "**Currently Broken** Install Hyprland & All Dependencies" \
+        "Update System"                         "Update System" \
+        "Piercing Gimp"                         "Piercing Gimp Presets (Distro Agnostic)" \
+        "PiercingXX Rice"                       "Apply Piercing Rice (Distro Agnostic)" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
 }
 # Main menu loop
 while true; do
     clear
+    echo -e "${BLUE}PiercingXX's Arch Mod Script${NC}"
     echo -e "${GREEN}Welcome ${username}${NC}\n"
     choice=$(menu)
     case $choice in
-        "Step 1")
-            sudo apt update && upgrade -y
-            wait
-            sudo apt full-upgrade -y
-            wait
-            sudo apt install -f
-            wait
-            sudo dpkg --configure -a
-            sudo apt --fix-broken install -y
-            wait
-            sudo apt autoremove -y
-            sudo apt update && upgrade -y
+        "Update System")
             echo -e "${YELLOW}Updating System...${NC}"
-            # Check if nala is installed
-                if ! command_exists nala; then
-                echo "nala is not installed. Installing now..."
-                # Install nala using apt
-                sudo apt install nala -y
-                fi
-            wait
+                sudo apt update && upgrade -y
+                wait
+                sudo apt full-upgrade -y
+                wait
+                sudo apt install -f
+                wait
+                sudo dpkg --configure -a
+                sudo apt --fix-broken install -y
+                wait
+                sudo apt autoremove -y
+                sudo apt update && upgrade -y
+                wait
             # Check if flatpak is installed and update it
                 if command_exists flatpak; then
                     echo "Updating flatpak packages..."
                     flatpak update -y
                 else
                     echo "Flatpak is not installed."
-                    sudo agt install flatpak -y
-                    sudo apt install gnome-software-plugin-flatpak -y
-                    flatpak remote-add flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-                    flatpak update
                 fi
-            wait
+                wait
             echo -e "${GREEN}System Updated Successfully!${NC}"
-            # Copy debian-maintenance.sh to home directory
-                cd scripts || exit
-                cp -f debian-maintenance.sh /home/"$username"
-                chown "$username":"$username" /home/"$username"/debian-maintenance.sh
-                cd "$builddir" || exit
-            echo -e "${GREEN}debian-maintenance.sh Copied To Home Directory${NC}"
             ;;
-        "Step 2")
-            echo -e "${YELLOW}Installing Gnome...${NC}"
-                cd scripts || exit
-                chmod u+x gnomeinstall.sh
-                sudo ./gnomeinstall.sh
-                cd "$builddir" || exit
-            echo -e "${GREEN}Gnome Installed Successfully!${NC}"
-            ;;
-        "Step 3")
-            echo -e "${YELLOW}Installing Core Applications...${NC}"
-                cd scripts || exit
-                chmod u+x apps.sh
-                sudo ./apps.sh
-                cd "$builddir" || exit
-            echo -e "${GREEN}Core Apps Installed successfully!${NC}"
+        "Piercing Gimp")
             # Gimp Dots
                 echo -e "${YELLOW}Installing Piercing Gimp Presets...${NC}"
                 if git clone https://github.com/Piercingxx/gimp-dots.git; then
                     chmod -R u+x gimp-dots
                     chown -R "$username":"$username" gimp-dots
-                    cd ./gimp-dots || exit
-                    ./gimp-mod.sh
+                    sudo rm -Rf /home/"$username"/.var/app/org.gimp.GIMP/config/GIMP/*
+                    sudo rm -Rf /home/"$username"/.config/GIMP/*
+                    mkdir -p /home/"$username"/.config/GIMP/3.0
+                    chown -R "$username":"$username" /home/"$username"/.config/GIMP
+                    cd gimp-dots/Gimp || exit
+                    cp -Rf 3.0/* /home/"$username"/.config/GIMP/3.0
+                    chown "$username":"$username" -R /home/"$username"/.config/GIMP
                     cd "$builddir" || exit
                     echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
                 else
                     echo -e "${RED}Failed to clone gimp-dots repository${NC}"
                 fi
+            ;;
+        "PiercingXX Rice")
+            echo -e "${YELLOW}Downloading and Applying PiercingXX Rice...${NC}"
+                # .config Dot Files
                 echo -e "${YELLOW}Downloading PiercingXX Dot Files...${NC}"
                     git clone https://github.com/Piercingxx/piercing-dots.git
                         chmod -R u+x piercing-dots
@@ -156,42 +122,12 @@ while true; do
                     cp -Rf piercing-dots/refs/* /home/"$username"/Downloads/refs
                     chown -R "$username":"$username" /home/"$username"/Downloads/refs
                 rm -rf piercing-dots
-                # Beautiful Bash  
-                git clone https://github.com/christitustech/mybash
-                    chmod -R u+x mybash
-                    chown -R "$username":"$username" mybash
-                    cd mybash || exit
-                    ./setup.sh
-                    cd "$builddir" || exit
-                    rm -rf mybash
-                echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
-            ;;
-        "Optional Nvidia Drivers")
-            echo -e "${YELLOW}Nvidia Drivers...${NC}"            
-                cd scripts || exit
-                chmod u+x nvidia.sh
-                sudo ./nvidia.sh
-                cd "$builddir" || exit
-            ;;
-        "Optional Surface Kernel")
-            echo -e "${YELLOW}Microsoft Surface Kernel...${NC}"            
-                cd scripts || exit
-                chmod u+x Surface.sh
-                sudo ./Surface.sh
-                cd "$builddir" || exit
-            ;;
-        "Hyprland"*)
-            echo -e "${YELLOW}Installing Hyprland & Dependencies...${NC}"
-                cd scripts || exit
-                chmod u+x hyprland-install.sh
-                ./hyprland-install.sh
-                cd "$builddir" || exit
-            echo -e "${GREEN}Installed successfully!${NC}"
+            echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
             ;;
         "Reboot System")
             echo -e "${YELLOW}Rebooting system in 3 seconds...${NC}"
             sleep 2
-            sudo reboot
+            reboot
             ;;
         "Exit")
             clear
