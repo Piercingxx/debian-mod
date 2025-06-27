@@ -190,6 +190,7 @@ flatpak install flathub org.freedesktop.Platform.GL.nvidia-545-29-06 -y
 # necessary for steam
 apt install libgl1-nvidia-glvnd-glx:i386 -y
 rm cuda-repo-debian12-12-3-local_12.3.1-545.23.08-1_amd64.deb
+            ;;
         "Testing")
             echo -e "${YELLOW}Installing Testing Branch...${NC}"
                 cd scripts || exit
