@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # https://github.com/piercingxx
 
 username=$(id -u -n 1000)
