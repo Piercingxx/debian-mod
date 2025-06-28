@@ -15,22 +15,40 @@ echo "Updating Repositories"
 sudo apt update && upgrade -y
 wait
 
-# Making .config and.fonts Directories
-cd "$builddir" || exit
-mkdir -p /home/"$username"/.config
-chown -R "$username":"$username" /home/"$username"/.config
-mkdir -p /home/"$username"/.fonts
-chown -R "$username":"$username" /home/"$username"/.fonts
-mkdir -p /home/"$username"/.icons
-chown -R "$username":"$username" /home/"$username"/.icons
-mkdir -p /home/"$username"/Pictures/backgrounds
-chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
-# Used for fstab
-mkdir -p /media/Working-Storage
-chown "$username":"$username" /home/"$username"/media/Archived-Storage
-mkdir -p /media/Archived-Storage
-chown "$username":"$username" /home/"$username"/media/Working-Storage
-
+# Create Directories if needed
+    # font directory
+        if [ ! -d "$HOME/.fonts" ]; then
+            mkdir -p "$HOME/.fonts"
+        fi
+        chown -R "$username":"$username" "$HOME"/.fonts
+    # config directory
+        if [ ! -d "$HOME/.config" ]; then
+            mkdir -p /home/"$username"/.config
+        fi
+        chown -R "$username":"$username" /home/"$username"/.config
+    # icons directory
+        if [ ! -d "$HOME/.icons" ]; then
+            mkdir -p /home/"$username"/.icons
+        fi
+        chown -R "$username":"$username" /home/"$username"/.icons
+    # Background and Profile Image Directories
+        if [ ! -d "$HOME/$username/Pictures/backgrounds" ]; then
+            mkdir -p /home/"$username"/Pictures/backgrounds
+        fi
+        chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
+        if [ ! -d "$HOME/$username/Pictures/profile-image" ]; then
+            mkdir -p /home/"$username"/Pictures/profile-image
+        fi
+        chown -R "$username":"$username" /home/"$username"/Pictures/profile-image
+    # fstab external drive mounting directory
+        if [ ! -d "$HOME/.media/Working-Storage" ]; then
+            mkdir -p /media/Working-Storage
+        fi
+        chown "$username":"$username" /home/"$username"/media/Working-Storage
+        if [ ! -d "$HOME/.media/Archived-Storage" ]; then
+            mkdir -p /media/Archived-Storage
+        fi
+        chown "$username":"$username" /home/"$username"/media/Archived-Storage
 
 # Installing important things && stuff && some dependencies
 echo "Installing Programs and Drivers"
