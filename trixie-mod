@@ -129,6 +129,7 @@ while true; do
                         cd piercing-dots || exit
                         cd scripts || exit
                         ./gnome-customizations.sh
+                        wait
                         cd "$builddir" || exit
                 # Add in backgrounds and themes and apply them
                     mkdir -p /home/"$username"/Pictures/backgrounds
@@ -148,17 +149,18 @@ while true; do
                     rm -Rf piercing-dots
             # Apply Gimp Dots
                 echo -e "${YELLOW}Installing Piercing Gimp Presets...${NC}"
-                    if git clone https://github.com/Piercingxx/gimp-dots.git; then
-                        chmod -R u+x gimp-dots
-                        chown -R "$username":"$username" gimp-dots
-                        cd ./gimp-dots
-                        sudo ./gimp-mod.sh
-                        cd "$builddir" || exit
-                        rm -Rf gimp-dots
-                        echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
-                    else
-                        echo -e "${RED}Failed to clone gimp-dots repository${NC}"
-                    fi
+                rm -rf gimp-dots
+                if git clone https://github.com/Piercingxx/gimp-dots.git; then
+                    chmod -R u+x gimp-dots
+                    chown -R "$username":"$username" gimp-dots
+                    cd ./gimp-dots || exit
+                    ./gimp-mod.sh
+                    cd "$builddir" || exit
+                    rm -Rf gimp-dots
+                    echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
+                else
+                    echo -e "${RED}Failed to clone gimp-dots repository${NC}"
+                fi
             # Apply Beautiful Bash
                 echo -e "${YELLOW}Installing Beautiful Bash...${NC}"
                 git clone https://github.com/christitustech/mybash
