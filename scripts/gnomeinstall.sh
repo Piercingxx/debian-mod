@@ -177,6 +177,3 @@ sudo apt full-upgrade -y
 wait
 sudo apt install -f
 dpkg --configure -a
-echo "After reboot run 2.sh"
-sleep 3 && echo "Rebooting"
-sudo reboot

@@ -43,8 +43,8 @@ function msg_box() {
 function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
         --menu "Run Options In Order:" 0 0 0 \
-        "Step 1"                                "Update System" \
-        "Step 2"                                "Installs Gnome & Dependencies" \
+        "Step 1"                                "Update System & Depends for Step 2" \
+        "Step 2"                                "Install Gnome & Depends & Apps" \
         "Optional Nvidia Drivers"               "Do not install if on Surface kernal" \
         "Optional Surface Kernel"               "Microsoft Surface Kernal" \
         "Hyprland"                              "**Currently Broken** Install Hyprland & All Dependencies" \
@@ -95,6 +95,7 @@ while true; do
                 cp -f debian-maintenance.sh /home/"$username"
                 chown "$username":"$username" /home/"$username"/debian-maintenance.sh
                 cd "$builddir" || exit
+            sudo reboot
             echo -e "${GREEN}debian-maintenance.sh Copied To Home Directory${NC}"
             ;;
         "Step 2")
@@ -172,6 +173,7 @@ while true; do
                     cd "$builddir" || exit
                     rm -rf mybash
                 echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
+            sudo reboot
             ;;
         "Optional Nvidia Drivers")
             echo -e "${YELLOW}Nvidia Drivers...${NC}"            
