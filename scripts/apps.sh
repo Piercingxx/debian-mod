@@ -159,7 +159,6 @@ sudo apt install gnome-shell-extension-appindicator -y
 sudo apt install gnome-shell-extension-gsconnect -y
 sudo apt install gnome-shell-extension-caffeine -y
 sudo apt install gnome-shell-extension-blur-my-shell -y
-sudo apt install gnome-shell-extension-autohidetopbar -y
 sudo apt install gnome-shell-extension-tiling-assistant -y
 # App Icons Taskbar
 wget https://gitlab.com/AndrewZaech/aztaskbar/-/archive/main/aztaskbar-main.tar
