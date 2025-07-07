@@ -158,24 +158,40 @@ sleep 2
 sudo apt install gnome-shell-extension-appindicator -y
 sudo apt install gnome-shell-extension-gsconnect -y
 sudo apt install gnome-shell-extension-caffeine -y
+sudo apt install gnome-shell-extension-blur-my-shell -y
+sudo apt install gnome-shell-extension-autohidetopbar -y
+sudo apt install gnome-shell-extension-tiling-assistant -y
 # App Icons Taskbar
 wget https://gitlab.com/AndrewZaech/aztaskbar/-/archive/main/aztaskbar-main.tar
+chmod u+x aztaskbar-main.tar
 gnome-extensions install aztaskbar-main.tar
-# Awesome Tiles
-git clone https://github.com/velitasali/gnome-shell-extension-awesome-tiles.git
-chmod -R u+x gnome-shell-extension-awesome-tiles
-cd gnome-shell-extension-awesome-tiles || exit
-./install.sh local-install
-cd ..
-rm -rf gnome-shell-extension-awesome-tiles
-# Worthless Gaps
+# Useless Gaps
 git clone https://github.com/mipmip/gnome-shell-extensions-useless-gaps.git
 chmod -R u+x nome-shell-extensions-useless-gaps
 cd gnome-shell-extensions-useless-gaps || exit
-./install.sh local-install
+sudo ./install.sh local-install
+cd "$builddir" || exit
+rm -rf gnome-shell-extensions-useless-gaps
 # Just Perfection
-# Blur My Shell
-# Workspace Buttons With App Icons
+git clone https://gitlab.gnome.org/jrahmatzadeh/just-perfection/-/archive/main/just-perfection-main.zip
+extract just-perfection-main.zip
+chmod -R u+x just-perfection-main
+cd just-perfection-main || exit
+./scripts/build.sh -i
+cd "$builddir" || exit
+rm -rf just-perfection-main
+# Workspaces w/ Icons
+git clone https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main
+extract workspaces-by-open-apps-main.zip
+chmod -R u+x workspaces-by-open-apps-main
+cd workspaces-by-open-apps-main || exit
+sudo ./install.sh local-install
+cd "$builddir" || exit
+rm -rf workspaces-by-open-apps-main
+
+
+
+
 
 #Nautilus Customization
 sudo apt install gnome-sushi -y
