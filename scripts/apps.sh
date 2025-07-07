@@ -172,6 +172,7 @@ sudo ./install.sh local-install
 cd "$builddir" || exit
 rm -rf gnome-shell-extensions-useless-gaps
 # Just Perfection
+# gext install just-perfection-desktop@just-perfection
 git clone https://gitlab.gnome.org/jrahmatzadeh/just-perfection/-/archive/main/just-perfection-main.zip
 extract just-perfection-main.zip
 chmod -R u+x just-perfection-main
@@ -187,10 +188,6 @@ cd workspaces-by-open-apps-main || exit
 sudo ./install.sh local-install
 cd "$builddir" || exit
 rm -rf workspaces-by-open-apps-main
-
-
-
-
 
 #Nautilus Customization
 sudo apt install gnome-sushi -y

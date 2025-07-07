@@ -45,6 +45,7 @@ function menu() {
         --menu "Run Options In Order:" 0 0 0 \
         "Step 1"                                "Update System & Depends for Step 2" \
         "Step 2"                                "Install Gnome & Depends & Apps" \
+        "Optional Apps"                         "Additional Apps" \
         "Optional Nvidia Drivers"               "Do not install if on Surface kernal" \
         "Optional Surface Kernel"               "Microsoft Surface Kernal" \
         "Hyprland"                              "**Currently Broken** Install Hyprland & All Dependencies" \
@@ -95,8 +96,8 @@ while true; do
                 cp -f debian-maintenance.sh /home/"$username"
                 chown "$username":"$username" /home/"$username"/debian-maintenance.sh
                 cd "$builddir" || exit
+            msg_box "System will reboot now. Re-run the script after reboot to continue."
             sudo reboot
-            echo -e "${GREEN}debian-maintenance.sh Copied To Home Directory${NC}"
             ;;
         "Step 2")
             # Install Gnome and Dependencies
@@ -173,6 +174,7 @@ while true; do
                     cd "$builddir" || exit
                     rm -rf mybash
                 echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
+            msg_box "System will reboot now. Re-run the script after reboot to continue."
             sudo reboot
             ;;
         "Optional Nvidia Drivers")
