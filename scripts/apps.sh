@@ -79,6 +79,7 @@ sudo apt install gh -y
 sudo apt install lua5.4 -y
 sudo apt install gnome-disk-utility -y
 sudo apt install papirus-icon-theme -y
+sudo apt install ulauncher -y
 wait
 flatpak install flathub net.waterfox.waterfox -y
 flatpak install flathub md.obsidian.Obsidian -y
@@ -170,6 +171,7 @@ sudo apt install gnome-shell-extension-gsconnect -y
 sudo apt install gnome-shell-extension-caffeine -y
 sudo apt install gnome-shell-extension-blur-my-shell -y
 sudo apt install gnome-shell-extension-tiling-assistant -y
+# Super Key
 # App Icons Taskbar
 wget https://gitlab.com/AndrewZaech/aztaskbar/-/archive/main/aztaskbar-main.tar
 chmod u+x aztaskbar-main.tar
