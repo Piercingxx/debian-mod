@@ -125,13 +125,25 @@ sudo dpkg --add-architecture i386
 wget "https://en.fss.flashforge.com/10000/software/e02d016281d06012ea71a671d1e1fdb7.deb"
 chown "$username":"$username" e02d016281d06012ea71a671d1e1fdb7.deb
 
+# Ulauncher
+gpg --keyserver keyserver.ubuntu.com --recv 0xfaf1020699503176
+gpg --export 0xfaf1020699503176 | sudo tee /usr/share/keyrings/ulauncher-archive-keyring.gpg >/dev/null
+echo "deb [signed-by=/usr/share/keyrings/ulauncher-archive-keyring.gpg] http://ppa.launchpad.net/agornostal/ulauncher/ubuntu noble main" | sudo tee /etc/apt/sources.list.d/ulauncher-noble.list
+sudo apt update -y
+sudo apt install ulauncher -y
+
+# Tailscale
+    curl -fsSL https://tailscale.com/install.sh | sh
+
+# Ollama
+    curl -fsSL https://ollama.com/install.sh | sh
+
 sudo apt update
 wait
 sudo apt upgrade -y
 wait
 
 echo "Installing Fonts"
-sleep 2
 # Installing fonts
 cd "$builddir" || exit
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
@@ -147,14 +159,12 @@ rm -rf Meslo.zip
 apt install fonts-font-awesome fonts-noto-color-emoji -y
 apt install ttf-mscorefonts-installer -y
 apt install fonts-terminus -y
-
 # Reload Font
 fc-cache -vf
 wait
 
 # Extensions
 echo "Gnome Extensions"
-sleep 2
 sudo apt install gnome-shell-extension-appindicator -y
 sudo apt install gnome-shell-extension-gsconnect -y
 sudo apt install gnome-shell-extension-caffeine -y
@@ -172,7 +182,7 @@ sudo ./install.sh local-install
 cd "$builddir" || exit
 rm -rf gnome-shell-extensions-useless-gaps
 # Just Perfection
-# gext install just-perfection-desktop@just-perfection
+gext install just-perfection-desktop@just-perfection
 git clone https://gitlab.gnome.org/jrahmatzadeh/just-perfection/-/archive/main/just-perfection-main.zip
 extract just-perfection-main.zip
 chmod -R u+x just-perfection-main

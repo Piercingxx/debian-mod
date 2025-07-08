@@ -49,7 +49,6 @@ function menu() {
         "Applications"                          "Install Applications and Utilities" \
         "Nvidia Drivers"                        "Do not install if on Surface kernal" \
         "Testing"                               "Debian Only (you can not switch back)" \
-        "Hyprland"                              "This Will Install Hyprland & All Dependencies" \
         "PiercingXX Rice"                       "Apply Piercing Rice (Distro Agnostic)" \
         "Piercing Gimp"                         "Piercing Gimp Presets (Distro Agnostic)" \
         "Beautiful Bash"                        "Chris Titus' Beautiful Bash Script" \
@@ -89,7 +88,7 @@ while true; do
                     flatpak update -y
                 else
                     echo "Flatpak is not installed."
-                    sudo agt install flatpak -y
+                    sudo apt install flatpak -y
                     sudo apt install gnome-software-plugin-flatpak -y
                     flatpak remote-add flathub https://dl.flathub.org/repo/flathub.flatpakrepo
                     flatpak update

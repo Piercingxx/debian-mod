@@ -29,6 +29,7 @@ sudo apt install gnome-shell-extension-manager -y
 sudo apt install papirus-icon-theme -y
 wait
 pipx install gnome-extensions-cli --system-site-packages
+pipx ensurepath
 
 
 echo "Changing Graphical Login"

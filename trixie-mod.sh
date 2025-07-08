@@ -45,7 +45,6 @@ function menu() {
         --menu "Run Options In Order:" 0 0 0 \
         "Step 1"                                "Update System & Depends for Step 2" \
         "Step 2"                                "Install Gnome & Depends & Apps" \
-        "Optional Apps"                         "Additional Apps" \
         "Optional Nvidia Drivers"               "Do not install if on Surface kernal" \
         "Optional Surface Kernel"               "Microsoft Surface Kernal" \
         "Hyprland"                              "**Currently Broken** Install Hyprland & All Dependencies" \
@@ -84,7 +83,7 @@ while true; do
                     flatpak update -y
                 else
                     echo "Flatpak is not installed."
-                    sudo agt install flatpak -y
+                    sudo apt install flatpak -y
                     sudo apt install gnome-software-plugin-flatpak -y
                     flatpak remote-add flathub https://dl.flathub.org/repo/flathub.flatpakrepo
                     flatpak update
@@ -114,7 +113,7 @@ while true; do
                     sudo ./apps.sh
                     cd "$builddir" || exit
                 echo -e "${GREEN}Core Apps Installed successfully!${NC}"
-            #Apply Piercing Rice
+            # Apply Piercing Rice
                 echo -e "${YELLOW}Downloading and Applying PiercingXX Rice...${NC}"
                 # .config Dot Files
                 echo -e "${YELLOW}Downloading PiercingXX Dot Files...${NC}"
@@ -149,30 +148,30 @@ while true; do
                     cp -Rf piercing-dots/refs/* /home/"$username"/Downloads/refs
                     chown -R "$username":"$username" /home/"$username"/Downloads/refs
                     rm -Rf piercing-dots
-            # Apply Gimp Dots
-                echo -e "${YELLOW}Installing Piercing Gimp Presets...${NC}"
-                rm -rf gimp-dots
-                if git clone https://github.com/Piercingxx/gimp-dots.git; then
-                    chmod -R u+x gimp-dots
-                    chown -R "$username":"$username" gimp-dots
-                    cd ./gimp-dots || exit
-                    ./gimp-mod.sh
-                    cd "$builddir" || exit
-                    rm -Rf gimp-dots
-                    echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
-                else
-                    echo -e "${RED}Failed to clone gimp-dots repository${NC}"
-                fi
-            # Apply Beautiful Bash
-                echo -e "${YELLOW}Installing Beautiful Bash...${NC}"
-                git clone https://github.com/christitustech/mybash
-                    chmod -R u+x mybash
-                    chown -R "$username":"$username" mybash
-                    cd mybash || exit
-                    ./setup.sh
-                    wait
-                    cd "$builddir" || exit
-                    rm -rf mybash
+                # Apply Gimp Dots
+                    echo -e "${YELLOW}Installing Piercing Gimp Presets...${NC}"
+                    rm -rf gimp-dots
+                    if git clone https://github.com/Piercingxx/gimp-dots.git; then
+                        chmod -R u+x gimp-dots
+                        chown -R "$username":"$username" gimp-dots
+                        cd ./gimp-dots || exit
+                        ./gimp-mod.sh
+                        cd "$builddir" || exit
+                        rm -Rf gimp-dots
+                        echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
+                    else
+                        echo -e "${RED}Failed to clone gimp-dots repository${NC}"
+                    fi
+                # Apply Beautiful Bash
+                    echo -e "${YELLOW}Installing Beautiful Bash...${NC}"
+                    git clone https://github.com/christitustech/mybash
+                        chmod -R u+x mybash
+                        chown -R "$username":"$username" mybash
+                        cd mybash || exit
+                        ./setup.sh
+                        wait
+                        cd "$builddir" || exit
+                        rm -rf mybash
                 echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
             msg_box "System will reboot now. Re-run the script after reboot to continue."
             sudo reboot
