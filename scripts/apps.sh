@@ -94,6 +94,9 @@ flatpak install flathub io.missioncenter.MissionCenter -y
 flatpak install flathub com.tomjwatson.Emote -y
 flatpak install flathub org.kde.kdenlive -y
 flatpak install flathub io.github.shiftey.Desktop -y
+flatpak install flathub com.flashforge.FlashPrint -y
+flatpak install flathub com.discordapp.Discord -y
+
 
 # Install Gnome-extensions-cli
 pipx install gnome-extensions-cli --system-site-packages
