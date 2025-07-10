@@ -45,7 +45,7 @@ function menu() {
         --menu "Run Options In Order:" 0 0 0 \
         "Step 1"                                "Update System & Depends for Step 2" \
         "Step 2"                                "Install Gnome & Depends & Apps" \
-        "Optional Nvidia Drivers"               "Do not install if on Surface kernal" \
+        "Step 3"                                "Re-Apply Gnome Customizations"\
         "Optional Surface Kernel"               "Microsoft Surface Kernal" \
         "Hyprland"                              "**Currently Broken** Install Hyprland & All Dependencies" \
         "Reboot System"                         "Reboot the system" \
@@ -176,12 +176,23 @@ while true; do
             msg_box "System will reboot now. Re-run the script after reboot to continue."
             sudo reboot
             ;;
-        "Optional Nvidia Drivers")
-            echo -e "${YELLOW}Nvidia Drivers...${NC}"            
-                cd scripts || exit
-                chmod u+x nvidia.sh
-                sudo ./nvidia.sh
-                cd "$builddir" || exit
+        "Step 3")
+            echo -e "${YELLOW}Reapplying Gnome Customizations...${NC}"
+            # Piercings Gnome Customizations
+                echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
+                if [ ! -d "piercing-dots" ] ; then
+                    git clone https://github.com/Piercingxx/piercing-dots.git
+                else
+                    rm -rf piercing-dots
+                    git clone https://github.com/Piercingxx/piercing-dots.git
+                fi
+                    chmod -R u+x piercing-dots
+                    chown -R "$username":"$username" piercing-dots
+                    cd piercing-dots || exit
+                    cd scripts || exit
+                    ./gnome-customizations.sh
+                    wait
+                    cd "$builddir" || exit
             ;;
         "Optional Surface Kernel")
             echo -e "${YELLOW}Microsoft Surface Kernel...${NC}"            
@@ -189,14 +200,6 @@ while true; do
                 chmod u+x Surface.sh
                 sudo ./Surface.sh
                 cd "$builddir" || exit
-            ;;
-        "Cosmic"*)
-            echo -e "${YELLOW}Installing Cosmic & Dependencies...${NC}"
-                cd scripts || exit
-                chmod u+x cosmic-install.sh
-                ./cosmic-install.sh
-                cd "$builddir" || exit
-            echo -e "${GREEN}Installed successfully!${NC}"
             ;;
         "Hyprland"*)
             echo -e "${YELLOW}Installing Hyprland & Dependencies...${NC}"
