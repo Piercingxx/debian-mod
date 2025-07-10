@@ -193,6 +193,7 @@ while true; do
                     ./gnome-customizations.sh
                     wait
                     cd "$builddir" || exit
+                    rm -rf piercing-dots
             ;;
         "Optional Surface Kernel")
             echo -e "${YELLOW}Microsoft Surface Kernel...${NC}"            

@@ -138,6 +138,9 @@ sudo apt install ulauncher -y
 
 # Ollama
     curl -fsSL https://ollama.com/install.sh | sh
+    #ollama pull gemma3:12b
+    ollama pull gemma3n:latest
+    ollama pull codellama:latest
 
 sudo apt update
 wait
