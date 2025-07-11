@@ -90,10 +90,10 @@ while true; do
                 fi
             wait
             echo -e "${GREEN}System Updated Successfully!${NC}"
-            # Copy debian-maintenance.sh to home directory
+            # Copy maintenance-debian.sh to home directory
                 cd scripts || exit
-                cp -f debian-maintenance.sh /home/"$username"
-                chown "$username":"$username" /home/"$username"/debian-maintenance.sh
+                cp -f maintenance-debian.sh /home/"$username"
+                chown "$username":"$username" /home/"$username"/maintenance-debian.sh
                 cd "$builddir" || exit
             msg_box "System will reboot now. Re-run the script after reboot to continue."
             sudo reboot
