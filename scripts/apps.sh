@@ -101,6 +101,19 @@ flatpak install flathub com.discordapp.Discord -y
 # Install Gnome-extensions-cli
 pipx install gnome-extensions-cli --system-site-packages
 
+# Nvim & Depends
+    sudo apt install neovim -y
+    sudo apt install luarocks -y
+    sudo apt install python3-pip -y
+    sudo add-apt-repository ppa:lazygit-team/release
+    sudo apt update -y
+    sudo apt install lazygit -y
+    sudo apt install texlive-full -y
+    sudo apt install sqlite -y
+    sudo npm install -g @mermaid-js/mermaid-cli
+    sudo npm install -g neovim
+    python3 -m pip install --user --upgrade pynvim
+
 # VSCode
 wget "https://vscode.download.prss.microsoft.com/dbazure/download/stable/e170252f762678dec6ca2cc69aba1570769a5d39/code_1.88.1-1712771838_amd64.deb"
 wait
@@ -138,12 +151,17 @@ sudo apt install ulauncher -y
 
 # Tailscale
     curl -fsSL https://tailscale.com/install.sh | sh
+    wait
 
 # Ollama
     curl -fsSL https://ollama.com/install.sh | sh
+    wait
+    ollama serve
+    wait
+    #ollama pull codellama:latest
     #ollama pull gemma3:12b
     ollama pull gemma3n:latest
-    #ollama pull codellama:latest
+    wait
 
 sudo apt update
 wait
