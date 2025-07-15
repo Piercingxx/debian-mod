@@ -91,7 +91,7 @@ wait
     flatpak install flathub com.mattjakeman.ExtensionManager -y
     flatpak install flathub org.qbittorrent.qBittorrent -y
     flatpak install flathub io.missioncenter.MissionCenter -y
-    flatpak install flathub com.tomjwatson.Emote -y
+#    flatpak install flathub com.tomjwatson.Emote -y
     flatpak install flathub org.kde.kdenlive -y
     flatpak install flathub io.github.shiftey.Desktop -y
     flatpak install flathub com.flashforge.FlashPrint -y
@@ -147,20 +147,6 @@ wait
     echo "deb [signed-by=/usr/share/keyrings/ulauncher-archive-keyring.gpg] http://ppa.launchpad.net/agornostal/ulauncher/ubuntu noble main" | sudo tee /etc/apt/sources.list.d/ulauncher-noble.list
     sudo apt update -y
     sudo apt install ulauncher -y
-
-# Tailscale
-    curl -fsSL https://tailscale.com/install.sh | sh
-    wait
-
-# Ollama
-    curl -fsSL https://ollama.com/install.sh | sh
-    wait
-    ollama serve
-    wait
-    #ollama pull codellama:latest
-    #ollama pull gemma3:12b
-    ollama pull gemma3n:latest
-    wait
 
 # Installing fonts
     echo "Installing Fonts"
@@ -234,6 +220,17 @@ wait
     glib-compile-schemas /usr/share/glib-2.0/schemas
     cd "$builddir" || exit
     rm -rf nautilus-open-any-terminal
+
+## Tailscale
+#    curl -fsSL https://tailscale.com/install.sh | sh
+#    wait
+
+# Ollama
+    curl -fsSL https://ollama.com/install.sh | sh
+    #ollama pull codellama:latest
+    #ollama pull gemma3:12b
+    #ollama pull gemma3n:latest
+
 
 # Overkill is underrated 
     sudo apt update && upgrade -y
