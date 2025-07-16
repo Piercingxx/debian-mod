@@ -173,53 +173,52 @@ wait
 
 # Extensions
     echo "Gnome Extensions"
-    sudo apt install gnome-shell-extension-appindicator -y
-    sudo apt install gnome-shell-extension-gsconnect -y
-    sudo apt install gnome-shell-extension-caffeine -y
-    sudo apt install gnome-shell-extension-blur-my-shell -y
-    sudo apt install gnome-shell-extension-tiling-assistant -y
-# Super Key
-# App Icons Taskbar
-    wget https://gitlab.com/AndrewZaech/aztaskbar/-/archive/main/aztaskbar-main.tar
-    chmod u+x aztaskbar-main.tar
-    gnome-extensions install aztaskbar-main.tar
-# Useless Gaps
-    git clone https://github.com/mipmip/gnome-shell-extensions-useless-gaps.git
-    chmod -R u+x nome-shell-extensions-useless-gaps
-    cd gnome-shell-extensions-useless-gaps || exit
-    sudo ./install.sh local-install
-    cd "$builddir" || exit
-    rm -rf gnome-shell-extensions-useless-gaps
-# Just Perfection
-    gext install just-perfection-desktop@just-perfection
-    git clone https://gitlab.gnome.org/jrahmatzadeh/just-perfection/-/archive/main/just-perfection-main.zip
-    extract just-perfection-main.zip
-    chmod -R u+x just-perfection-main
-    cd just-perfection-main || exit
-    ./scripts/build.sh -i
-    cd "$builddir" || exit
-    rm -rf just-perfection-main
-# Workspaces w/ Icons
-    git clone https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main
-    extract workspaces-by-open-apps-main.zip
-    chmod -R u+x workspaces-by-open-apps-main
-    cd workspaces-by-open-apps-main || exit
-    sudo ./install.sh local-install
-    cd "$builddir" || exit
-    rm -rf workspaces-by-open-apps-main
-
-#Nautilus Customization
-    sudo apt install gnome-sushi -y
-    sudo apt install imagemagick nautilus-image-converter -y
-    sudo apt install nautilus-admin -y
-    sudo apt install gir1.2-gtk-4.0 -y
-    git clone https://github.com/Stunkymonkey/nautilus-open-any-terminal.git
-    cd nautilus-open-any-terminal || exit
-    make
-    sudo make install schema
-    glib-compile-schemas /usr/share/glib-2.0/schemas
-    cd "$builddir" || exit
-    rm -rf nautilus-open-any-terminal
+        sudo apt install gnome-shell-extension-appindicator -y
+        sudo apt install gnome-shell-extension-gsconnect -y
+        sudo apt install gnome-shell-extension-caffeine -y
+        sudo apt install gnome-shell-extension-blur-my-shell -y
+        sudo apt install gnome-shell-extension-tiling-assistant -y
+    # Super Key
+    # App Icons Taskbar
+        wget https://gitlab.com/AndrewZaech/aztaskbar/-/archive/main/aztaskbar-main.tar
+        chmod u+x aztaskbar-main.tar
+        gnome-extensions install aztaskbar-main.tar
+    # Useless Gaps
+        git clone https://github.com/mipmip/gnome-shell-extensions-useless-gaps.git
+        chmod -R u+x nome-shell-extensions-useless-gaps
+        cd gnome-shell-extensions-useless-gaps || exit
+        sudo ./install.sh local-install
+        cd "$builddir" || exit
+        rm -rf gnome-shell-extensions-useless-gaps
+    # Just Perfection
+        gext install just-perfection-desktop@just-perfection
+        git clone https://gitlab.gnome.org/jrahmatzadeh/just-perfection/-/archive/main/just-perfection-main.zip
+        extract just-perfection-main.zip
+        chmod -R u+x just-perfection-main
+        cd just-perfection-main || exit
+        ./scripts/build.sh -i
+        cd "$builddir" || exit
+        rm -rf just-perfection-main
+    # Workspaces w/ Icons
+        git clone https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main
+        extract workspaces-by-open-apps-main.zip
+        chmod -R u+x workspaces-by-open-apps-main
+        cd workspaces-by-open-apps-main || exit
+        sudo ./install.sh local-install
+        cd "$builddir" || exit
+        rm -rf workspaces-by-open-apps-main
+    #Nautilus Customization
+        sudo apt install gnome-sushi -y
+        sudo apt install imagemagick nautilus-image-converter -y
+        sudo apt install nautilus-admin -y
+        sudo apt install gir1.2-gtk-4.0 -y
+        git clone https://github.com/Stunkymonkey/nautilus-open-any-terminal.git
+        cd nautilus-open-any-terminal || exit
+        make
+        sudo make install schema
+        glib-compile-schemas /usr/share/glib-2.0/schemas
+        cd "$builddir" || exit
+        rm -rf nautilus-open-any-terminal
 
 ## Tailscale
 #    curl -fsSL https://tailscale.com/install.sh | sh
