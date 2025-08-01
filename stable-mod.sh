@@ -220,6 +220,13 @@ while true; do
                     ./setup.sh
                     cd "$builddir" || exit
                     rm -rf mybash
+                # Replace .bashrc
+                git clone https://github.com/Piercingxx/piercing-dots.git
+                    chmod -R u+x piercing-dots
+                    chown -R "$username":"$username" piercing-dots
+                    cp -Rf piercing-dots/bash/.bashrc /home/"$username"/
+                    chown -R "$username":"$username" /home/"$username"/.bashrc
+                rm -rf piercing-dots
             ;;
         "Reboot System")
             echo -e "${YELLOW}Rebooting system in 3 seconds...${NC}"

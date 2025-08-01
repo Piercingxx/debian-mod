@@ -141,10 +141,6 @@ while true; do
                     chown -R "$username":"$username" /home/"$username"/Downloads/refs
                     cp -Rf piercing-dots/refs/* /home/"$username"/Downloads/refs
                     chown -R "$username":"$username" /home/"$username"/Downloads/refs
-                # Replace .bashrc
-                    cp -Rf piercing-dots/bash/.bashrc /home/"$username"/
-                    chown -R "$username":"$username" /home/"$username"/.bashrc
-                    rm -Rf piercing-dots
                 # Apply Gimp Dots
                     rm -rf gimp-dots
                     if git clone https://github.com/Piercingxx/gimp-dots.git; then
@@ -168,6 +164,10 @@ while true; do
                         wait
                         cd "$builddir" || exit
                         rm -rf mybash
+                # Replace .bashrc
+                    cp -Rf piercing-dots/bash/.bashrc /home/"$username"/
+                    chown -R "$username":"$username" /home/"$username"/.bashrc
+                    rm -Rf piercing-dots
                 echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
             msg_box "System will reboot now. Re-run the script after reboot to continue."
             sudo reboot
