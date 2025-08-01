@@ -112,6 +112,12 @@ wait
     sudo npm install -g @mermaid-js/mermaid-cli
     sudo npm install -g neovim
     python3 -m pip install --user --upgrade pynvim
+    # Add Yazi
+    sudo add-apt-repository ppa:lihaohong/yazi -y
+    wait
+    sudo apt update -y
+    sudo apt install yazi -y
+    sudo apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick -y
 
 # VSCode
     wget "https://vscode.download.prss.microsoft.com/dbazure/download/stable/e170252f762678dec6ca2cc69aba1570769a5d39/code_1.88.1-1712771838_amd64.deb"

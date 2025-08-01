@@ -100,33 +100,27 @@ while true; do
             ;;
         "Step 2")
             # Install Gnome and Dependencies
-                echo -e "${YELLOW}Installing Gnome...${NC}"
                     cd scripts || exit
                     chmod u+x gnomeinstall.sh
                     sudo ./gnomeinstall.sh
+                    wait
                     cd "$builddir" || exit
-                echo -e "${GREEN}Gnome Installed Successfully!${NC}"
             # Install Apps
-                echo -e "${YELLOW}Installing Core Applications...${NC}"
                     cd scripts || exit
                     chmod u+x apps.sh
                     sudo ./apps.sh
+                    wait
                     cd "$builddir" || exit
-                echo -e "${GREEN}Core Apps Installed successfully!${NC}"
             # Apply Piercing Rice
-                echo -e "${YELLOW}Downloading and Applying PiercingXX Rice...${NC}"
                 # .config Dot Files
-                echo -e "${YELLOW}Downloading PiercingXX Dot Files...${NC}"
                     git clone https://github.com/Piercingxx/piercing-dots.git
                         chmod -R u+x piercing-dots
                         chown -R "$username":"$username" piercing-dots
                         cd piercing-dots || exit
                         cp -Rf dots/* /home/"$username"/.config/
                         chown "$username":"$username" -R /home/"$username"/.config/*
-                        cd "$builddir" || exit      
-                    echo -e "${GREEN}PiercingXX Dot Files Applied Successfully!${NC}"
+                        cd "$builddir" || exit
                 # Piercings Gnome Customizations
-                    echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
                         cd piercing-dots || exit
                         cd scripts || exit
                         ./gnome-customizations.sh
@@ -147,18 +141,20 @@ while true; do
                     chown -R "$username":"$username" /home/"$username"/Downloads/refs
                     cp -Rf piercing-dots/refs/* /home/"$username"/Downloads/refs
                     chown -R "$username":"$username" /home/"$username"/Downloads/refs
+                # Replace .bashrc
+                    cp -Rf piercing-dots/bash/.bashrc /home/"$username"/
+                    chown -R "$username":"$username" /home/"$username"/.bashrc
                     rm -Rf piercing-dots
                 # Apply Gimp Dots
-                    echo -e "${YELLOW}Installing Piercing Gimp Presets...${NC}"
                     rm -rf gimp-dots
                     if git clone https://github.com/Piercingxx/gimp-dots.git; then
                         chmod -R u+x gimp-dots
                         chown -R "$username":"$username" gimp-dots
                         cd ./gimp-dots || exit
                         ./gimp-mod.sh
+                        wait
                         cd "$builddir" || exit
-                        rm -Rf gimp-dots
-                        echo -e "${GREEN}Piercing Gimp Presets Installed Successfully!${NC}"
+                        rm -Rf gimp-dotsD
                     else
                         echo -e "${RED}Failed to clone gimp-dots repository${NC}"
                     fi

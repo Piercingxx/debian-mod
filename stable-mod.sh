@@ -175,6 +175,9 @@ while true; do
                     chown -R "$username":"$username" /home/"$username"/Downloads/refs
                     cp -Rf piercing-dots/refs/* /home/"$username"/Downloads/refs
                     chown -R "$username":"$username" /home/"$username"/Downloads/refs
+                # Replace .bashrc
+                    cp -Rf piercing-dots/bash/.bashrc /home/"$username"/
+                    chown -R "$username":"$username" /home/"$username"/.bashrc
                 rm -rf piercing-dots
             echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
             ;;
