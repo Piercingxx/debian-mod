@@ -51,60 +51,42 @@ This script automates the installation of everything on my Workstations/Rig/Tabl
 
 5. Run the first script:
 
-``` sudo ./1.sh ```
+``` ./install.sh ```
 
 
 6. After the system reboots open Terminal:
 
 ``` cd debian-mod ```
 
-``` sudo ./2.sh ```
+``` ./install.sh ```
 
 
-7. After the system reboots open Terminal (do not run as sudo):
-
-``` cd debian-mod ```
-
-``` ./3.sh ```
-
-
-8. Now you open Steam and allow to update BEFORE running "nvidia.sh". You can also login (don't forget to change compatibility settings). You can install games now or after you finish the install, not both.
+7. Now you open Steam and allow to update BEFORE running "nvidia.sh". You can also login (don't forget to change compatibility settings). You can install games now or after you finish the install, not both.
 
 
 ### **Optional** 
 
 
-9. Install Nvidia drivers if you want/need them. (If you are running a Microsoft Surface device you can skip this unless you also want to game or edit videos on the device):
+8. Install Nvidia drivers if you want/need them. (If you are running a Microsoft Surface device you can skip this unless you also want to game or edit videos on the device):
 
 ``` ./nvidia.sh ```
 
 
-9. Beautiful Bash:
-
-``` git clone https://github.com/christitustech/mybash ```
-
-``` cd mybash ```
-
-``` ./setup.sh ```
-
-
-11. If you are using a Microsoft Surface device you can now run the script:
+9. If you are using a Microsoft Surface device you can now run the script:
 
 ``` sudo ./Surface.sh ```
 
 
-12. On the newest hardware you will want to change into the Testing branch of Debian (note, you can not change back without a full reinstall), use:
-
-``` sudo ./testing.sh ```
-
-13. If you want to run Hyprland on Debian you must first run scripts 1, 2, 3, & testing.sh. You can then run:
+10. If you want to run Hyprland on Debian run:
 
 ``` sudo ./hyprland-setup.sh ```
 
-14. Run (replace "$USERNAME" with your username:
 
-``` rm -Rf /home/$USERNAME/debian-install ```
+10. On the newest hardware you will want to change into the Testing branch of Debian (note, you can not change back without a full reinstall), use:
 
+``` cd scripts ```
+
+``` sudo ./testing.sh ```
 
 If you come across any issues please let me know.
 
