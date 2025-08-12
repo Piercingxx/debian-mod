@@ -44,6 +44,12 @@ flatpak update
     flatpak install flathub com.flashforge.FlashPrint -y
     flatpak install flathub com.synology.synology-note-station -y
 
+    ## Install Yazi
+    #git clone https://github.com/sxyazi/yazi.git
+    #cd yazi || exit
+    #cargo build --release --locked
+    #cd "$builddir" || exit
+
 # Install Gnome-extensions-cli
     pipx install gnome-extensions-cli --system-site-packages
 
@@ -55,11 +61,6 @@ flatpak update
     sudo npm install -g @mermaid-js/mermaid-cli
     sudo npm install -g neovim
     python3 -m pip install --user --upgrade pynvim
-    # Add Yazi
-    sudo add-apt-repository ppa:lihaohong/yazi -y
-    wait
-    sudo apt update -y
-    sudo apt install yazi -y
 
 # VSCode
     wget "https://vscode.download.prss.microsoft.com/dbazure/download/stable/e170252f762678dec6ca2cc69aba1570769a5d39/code_1.88.1-1712771838_amd64.deb"
@@ -92,15 +93,15 @@ flatpak update
     sudo apt update -y
     sudo apt install ulauncher -y
 
-## Tailscale
-#    curl -fsSL https://tailscale.com/install.sh | sh
-#    wait
-
 # Ollama
     curl -fsSL https://ollama.com/install.sh | sh
     #ollama pull codellama:latest
     #ollama pull gemma3:12b
     #ollama pull gemma3n:latest
+
+# Tailscale
+    curl -fsSL https://tailscale.com/install.sh | sh
+    wait
 
 
 # Overkill is underrated 

@@ -44,8 +44,11 @@ echo "Installing Essentials"
 # Install dependencies
     sudo apt install wget gpg -y 
     sudo apt install zip unzip gzip tar -y
+    sudo apt install build-essential -y
     sudo apt install make -y
+    sudo apt install gcc -y
     sudo apt install curl -y
+    sudo apt install cargo -y
     sudo apt install pipx -y
     pipx install gnome-extensions-cli --system-site-packages
     pipx ensurepath
@@ -58,7 +61,6 @@ echo "Installing Essentials"
     sudo apt install cups -y
     sudo apt install util-linux -y
     sudo apt install xdg-utils -y
-    sudo apt install build-essential -y
     sudo apt install nautilus -y
     sudo apt install gnome-disk-utility -y
     sudo apt install gnome-calculator -y
@@ -76,6 +78,11 @@ echo "Installing Essentials"
     sudo apt install gparted -y
     sudo apt install gh -y
     sudo apt install papirus-icon-theme -y
+
+# Install Rust
+    #curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    #source $HOME/.cargo/env
+    #rustup update stable
 
 # Remove unwanted apps
     sudo apt remove gnome-terminal --purge -y
@@ -139,7 +146,6 @@ EOF
     unzip andagii.zip -d /home/"$username"/.fonts
     sudo rm FiraCode.zip Meslo.zip andagii.zip
     sudo apt install fonts-font-awesome fonts-noto-color-emoji -y
-    sudo apt install ttf-mscorefonts-installer -y
     sudo apt install fonts-terminus -y
     sudo apt install fonts-noto-color-emoji -y
 # Reload Font
@@ -166,17 +172,17 @@ EOF
         cd "$builddir" || exit
         rm -rf gnome-shell-extensions-useless-gaps
     # Just Perfection
-        gext install just-perfection-desktop@just-perfection
+        gnome-extensions-cli install just-perfection-desktop@just-perfection
         git clone https://gitlab.gnome.org/jrahmatzadeh/just-perfection/-/archive/main/just-perfection-main.zip
-        extract just-perfection-main.zip
+        unzip just-perfection-main.zip
         chmod -R u+x just-perfection-main
         cd just-perfection-main || exit
         ./scripts/build.sh -i
         cd "$builddir" || exit
         rm -rf just-perfection-main
-    # Workspaces w/ Icons
+    # Workspaces Buttons with App Icons
         git clone https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main
-        extract workspaces-by-open-apps-main.zip
+        unzip workspaces-by-open-apps-main.zip
         chmod -R u+x workspaces-by-open-apps-main
         cd workspaces-by-open-apps-main || exit
         sudo ./install.sh local-install
