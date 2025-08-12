@@ -11,17 +11,17 @@ This script automates the installation of everything on my Workstations/Rig/Tabl
 
 #### *** These scrips must be ran in order. Any deviation will break your system. The "nvidia.sh" "Surface.sh" and "testing.sh" scripts are hardware based/optional. ***
   
-- "1.sh" to install Gnome-shell and a few adjustments.
+- "Step 1" will ensure all Gnome Depends are ready for use then will reboot.
   
-- "2.sh" will install applications, fonts, cursors, and customize settings (it takes several minutes to run).
+- "Step 2" will install applications.
 
-- If you plan on using Steam then you need to open Steam at this point and fully install it BEFORE you install nvidia.sh. If you install Steam after nvidia.sh it is a headache.
+  - If you plan on using Steam then you need to open Steam at this point and fully install it BEFORE you install nvidia.sh. If you install Steam after nvidia.sh it is a headache.
   
-- "nvidia.sh" will install Nvidia drivers (if you don't have a Nvidia GPU skip this one, if you are installing on a Surface with the "Surface.sh" do not install these propritary drivers).
+- "Nvidia Driver" will install Nvidia drivers (if you don't have a Nvidia GPU skip this one, if you are installing on a Surface with the "Surface.sh" do not install these propritary drivers).
   
-- "Surface.sh" will install the necessary drivers to get a Microsoft Surface running on Debian (skip if not a Microsoft Surface Device).
+- "Optional Surface Kernel" will install the necessary drivers to get a Microsoft Surface running on Debian (skip if not a Microsoft Surface Device).
   
-- "hyprland-setup" will install hyprland on your Debian Testing with Gnome system.
+- "Hyprland" will install hyprland on your Debian Testing with Gnome system.
   
 - If you have multiple hard drives in your system, after you run all the scripts, edit your fstab to auto-mount your drives on boot.
 
