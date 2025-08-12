@@ -45,6 +45,7 @@ function menu() {
         --menu "Run Options In Order:" 0 0 0 \
         "Step 1"                                "Update System & Dependencies " \
         "Step 2"                                "Install Apps & Stuff" \
+        "Nvidia Driver"                         "Install Nvidia Drivers" \
         "Optional Surface Kernel"               "Microsoft Surface Kernal" \
         "Hyprland"                              "**Currently Broken** Install Hyprland & All Dependencies" \
         "Reboot System"                         "Reboot the system" \
@@ -181,6 +182,18 @@ while true; do
                     rm -Rf piercing-dots
                 echo -e "${GREEN}PiercingXX Rice Applied Successfully!${NC}"
             msg_box "System will reboot now. Re-run the script after reboot to continue."
+            sudo reboot
+            ;;
+        "Nvidia Driver")
+            echo -e "${YELLOW}Installing Nvidia Drivers...${NC}"
+            # Install Nvidia Drivers
+                cd scripts || exit
+                chmod u+x nvidia.sh
+                sudo ./nvidia.sh
+                wait
+                cd "$builddir" || exit
+            echo -e "${GREEN}Nvidia Drivers Installed Successfully!${NC}"
+            msg_box "Nvidia Drivers installed successfully. Reboot the system to apply changes."
             sudo reboot
             ;;
         "Optional Surface Kernel")
