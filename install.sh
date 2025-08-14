@@ -44,7 +44,6 @@ function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
         --menu "Run Options In Order:" 0 0 0 \
         "Step 1"                                "Update System & Dependencies " \
-        "Step 2"                                "Install Apps & Stuff" \
         "Nvidia Driver"                         "Install Nvidia Drivers" \
         "Optional Surface Kernel"               "Microsoft Surface Kernal" \
         "Hyprland"                              "**Currently Broken** Install Hyprland & All Dependencies" \
@@ -64,13 +63,6 @@ while true; do
                 chmod u+x step-1.sh
                 sudo ./step-1.sh
                 wait
-                cd "$builddir" || exit
-            msg_box "System will reboot now. Re-run the script after reboot to continue."
-            sudo reboot
-            ;;
-        "Step 2")
-            # Install Apps
-                cd scripts || exit
                 chmod u+x apps.sh
                 sudo ./apps.sh
                 wait
