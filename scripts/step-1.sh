@@ -4,42 +4,69 @@
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
+# Create Directories if needed
+    # font directory
+        if [ ! -d "$HOME/.fonts" ]; then
+            mkdir -p "$HOME/.fonts"
+        fi
+        chown -R "$username":"$username" "$HOME"/.fonts
+    # config directory
+        if [ ! -d "$HOME/.config" ]; then
+            mkdir -p /home/"$username"/.config
+        fi
+        chown -R "$username":"$username" /home/"$username"/.config
+    # icons directory
+        if [ ! -d "$HOME/.icons" ]; then
+            mkdir -p /home/"$username"/.icons
+        fi
+        chown -R "$username":"$username" /home/"$username"/.icons
+    # Background and Profile Image Directories
+        if [ ! -d "$HOME/$username/Pictures/backgrounds" ]; then
+            mkdir -p /home/"$username"/Pictures/backgrounds
+        fi
+        chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
+        if [ ! -d "$HOME/$username/Pictures/profile-image" ]; then
+            mkdir -p /home/"$username"/Pictures/profile-image
+        fi
+        chown -R "$username":"$username" /home/"$username"/Pictures/profile-image
+    # fstab external drive mounting directory
+        if [ ! -d "$HOME/.media/Working-Storage" ]; then
+            mkdir -p /home/"$username"/media/Working-Storage
+        fi
+        chown "$username":"$username" /home/"$username"/media/Working-Storage
+        if [ ! -d "$HOME/.media/Archived-Storage" ]; then
+            mkdir -p /home/"$username"/media/Archived-Storage
+        fi
+        chown "$username":"$username" /home/"$username"/media/Archived-Storage
 
-echo "Installing Essentials"
-    sudo apt update && upgrade -y
-    wait
-    sudo apt full-upgrade -y
-    wait
-    sudo apt install -f
-    wait
-    sudo dpkg --configure -a
-    sudo apt --fix-broken install -y
-    wait
-    sudo apt autoremove -y
-    sudo apt update && upgrade -y
+# Update System
+    echo -e "${YELLOW}Updating System...${NC}"  
+        sudo apt update && upgrade -y
+        wait
+        sudo apt full-upgrade -y
+        wait
+        sudo apt install -f
+        wait
+        sudo dpkg --configure -a
+        sudo apt --fix-broken install -y
+        wait
+        sudo apt autoremove -y
+        sudo apt update && upgrade -y
     # Check if nala is installed
         if ! command_exists nala; then
-        echo "nala is not installed. Installing now..."
-        # Install nala using apt
-        sudo apt install nala -y
+            echo "nala is not installed. Installing now..."
+            sudo apt install nala -y
         fi
+        wait
+    # Install flatpak
+        sudo apt install flatpak -y
+        sudo apt install gnome-software-plugin-flatpak -y
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+        wait
+        flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+        wait
+        flatpak update -y
     wait
-    # Check if flatpak is installed and update it
-        if command_exists flatpak; then
-            echo "Updating flatpak packages..."
-            flatpak update -y
-        else
-            echo "Flatpak is not installed."
-            sudo apt install flatpak -y
-            sudo apt install gnome-software-plugin-flatpak -y
-            flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-            wait
-            flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
-            wait
-            flatpak update -y
-        fi
-    wait
-
 
 # Install dependencies
     sudo apt install wget gpg -y 
@@ -100,57 +127,11 @@ EOF
 # Finalizing graphical login
     sudo systemctl enable gdm3 --now
 
-# Create Directories if needed
-    # font directory
-        if [ ! -d "$HOME/.fonts" ]; then
-            mkdir -p "$HOME/.fonts"
-        fi
-        chown -R "$username":"$username" "$HOME"/.fonts
-    # config directory
-        if [ ! -d "$HOME/.config" ]; then
-            mkdir -p /home/"$username"/.config
-        fi
-        chown -R "$username":"$username" /home/"$username"/.config
-    # icons directory
-        if [ ! -d "$HOME/.icons" ]; then
-            mkdir -p /home/"$username"/.icons
-        fi
-        chown -R "$username":"$username" /home/"$username"/.icons
-    # Background and Profile Image Directories
-        if [ ! -d "$HOME/$username/Pictures/backgrounds" ]; then
-            mkdir -p /home/"$username"/Pictures/backgrounds
-        fi
-        chown -R "$username":"$username" /home/"$username"/Pictures/backgrounds
-        if [ ! -d "$HOME/$username/Pictures/profile-image" ]; then
-            mkdir -p /home/"$username"/Pictures/profile-image
-        fi
-        chown -R "$username":"$username" /home/"$username"/Pictures/profile-image
-    # fstab external drive mounting directory
-        if [ ! -d "$HOME/.media/Working-Storage" ]; then
-            mkdir -p /home/"$username"/media/Working-Storage
-        fi
-        chown "$username":"$username" /home/"$username"/media/Working-Storage
-        if [ ! -d "$HOME/.media/Archived-Storage" ]; then
-            mkdir -p /home/"$username"/media/Archived-Storage
-        fi
-        chown "$username":"$username" /home/"$username"/media/Archived-Storage
-
-# Installing fonts
-    echo "Installing Fonts"
-    cd "$builddir" || exit
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
-    wget http://www.i18nguy.com/unicode/andagii.zip
-    unzip FiraCode.zip -d /home/"$username"/.fonts
-    unzip Meslo.zip -d /home/"$username"/.fonts
-    unzip andagii.zip -d /home/"$username"/.fonts
-    sudo rm FiraCode.zip Meslo.zip andagii.zip
-    sudo apt install fonts-font-awesome fonts-noto-color-emoji -y
-    sudo apt install fonts-terminus -y
-    sudo apt install fonts-noto-color-emoji -y
-# Reload Font
-    fc-cache -vf
+# Fonts Installation
+    chmod u+x fonts.sh
+    sudo ./fonts.sh
     wait
+    cd "$builddir" || exit
 
 # Extensions
     echo "Gnome Extensions"
@@ -160,6 +141,12 @@ EOF
         sudo apt install gnome-shell-extension-blur-my-shell -y
         sudo apt install gnome-shell-extension-tiling-assistant -y
     # Super Key
+        git clone https://github.com/Tommimon/super-key.git
+        chmod -R u+x super-key
+        cd super-key || exit
+        ./build.sh -i
+        cd "$builddir" || exit
+        rm -rf super-key
     # App Icons Taskbar
         wget https://gitlab.com/AndrewZaech/aztaskbar/-/archive/main/aztaskbar-main.tar
         chmod u+x aztaskbar-main.tar
@@ -201,6 +188,16 @@ EOF
         cd "$builddir" || exit
         rm -rf nautilus-open-any-terminal
 
+# Apply Piercing Rice
+    echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
+        rm -rf piercing-dots
+        git clone --depth 1 https://github.com/Piercingxx/piercing-dots.git
+        chmod -R u+x piercing-dots
+        chown -R "$username":"$username" piercing-dots
+        cd piercing-dots || exit
+        ./install.sh
+        cd "$builddir" || exit
+        rm -rf piercing-dots
 
 # Overkill is underrated 
     sudo apt update && sudo apt upgrade -y

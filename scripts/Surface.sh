@@ -16,7 +16,6 @@ if [[ -n "$(command -v nmcli)" && "$(nmcli -t -f STATE g)" != connected ]]; then
 fi
 
 apt update && upgrade -y
-wait
 
 wget -qO - https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc \
     | gpg --dearmor | sudo dd of=/etc/apt/trusted.gpg.d/linux-surface.gpg
@@ -26,15 +25,11 @@ echo "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main" \
 	| sudo tee /etc/apt/sources.list.d/linux-surface.list
 
 apt update
-wait
 
 apt install linux-image-surface linux-headers-surface libwacom-surface iptsd -y
-wait
 
 apt install linux-surface-secureboot-mok -y
-wait
 
 sudo update-grub
-wait
 
 echo "After reboot run vainfo"

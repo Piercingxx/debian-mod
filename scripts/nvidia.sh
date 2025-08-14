@@ -13,7 +13,6 @@ builddir=$(pwd)
 
 echo "Installing Nvidia Drivers, be patient this will take a while"
 
-
 # Video card drivers
   wget https://developer.download.nvidia.com/compute/cuda/12.3.1/local_installers/cuda-repo-debian12-12-3-local_12.3.1-545.23.08-1_amd64.deb
   dpkg -i cuda-repo-debian12-12-3-local_12.3.1-545.23.08-1_amd64.deb
