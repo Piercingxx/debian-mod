@@ -44,7 +44,7 @@ function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
         --menu "Run Options In Order:" 0 0 0 \
         "Install"                               "Update PiercingXX Debian" \
-        "Nvidia Driver"                         "Install Nvidia Drivers" \
+        "Nvidia Driver"                         "Install Nvidia Drivers (Do not install on a Surface Device)" \
         "Optional Surface Kernel"               "Microsoft Surface Kernal" \
         "Hyprland"                              "**Currently Broken** Install Hyprland & All Dependencies" \
         "Reboot System"                         "Reboot the system" \

@@ -27,22 +27,22 @@ flatpak update
 
 # Installing important things && stuff && some dependencies
     echo "Installing Apps & Dependencies"
-    flatpak install --noninteractive flathub net.waterfox.waterfox -y
-    flatpak install --noninteractive flathub md.obsidian.Obsidian -y
-    flatpak install --noninteractive flathub org.libreoffice.LibreOffice -y
-    flatpak install --noninteractive https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
-    flatpak install --noninteractive flathub org.darktable.Darktable -y
-    flatpak install --noninteractive flathub org.gnome.SimpleScan -y
-    flatpak install --noninteractive flathub org.blender.Blender -y
-    flatpak install --noninteractive flathub com.mattjakeman.ExtensionManager -y
-    flatpak install --noninteractive flathub org.qbittorrent.qBittorrent -y
-    flatpak install --noninteractive flathub io.missioncenter.MissionCenter -y
-    flatpak install --noninteractive flathub org.kde.kdenlive -y
-    flatpak install --noninteractive flathub io.github.shiftey.Desktop -y
-    flatpak install --noninteractive flathub com.discordapp.Discord -y
-    flatpak install --noninteractive io.github.realmazharhussain.GdmSettings -y
-    flatpak install --noninteractive flathub com.flashforge.FlashPrint -y
-    flatpak install --noninteractive flathub com.synology.synology-note-station -y
+    flatpak install flathub net.waterfox.waterfox -y
+    flatpak install flathub md.obsidian.Obsidian -y
+    flatpak install flathub org.libreoffice.LibreOffice -y
+    flatpak install https://flathub.org/beta-repo/appstream/org.gimp.GIMP.flatpakref -y
+    flatpak install flathub org.darktable.Darktable -y
+    flatpak install flathub org.gnome.SimpleScan -y
+    flatpak install flathub org.blender.Blender -y
+    flatpak install flathub com.mattjakeman.ExtensionManager -y
+    flatpak install flathub org.qbittorrent.qBittorrent -y
+    flatpak install flathub io.missioncenter.MissionCenter -y
+    flatpak install flathub org.kde.kdenlive -y
+    flatpak install flathub io.github.shiftey.Desktop -y
+    flatpak install flathub com.discordapp.Discord -y
+    flatpak install --noninteractive flathub io.github.realmazharhussain.GdmSettings -y
+    flatpak install flathub com.flashforge.FlashPrint -y
+    flatpak install flathub com.synology.synology-note-station -y
 
     ## Install Yazi
     #git clone https://github.com/sxyazi/yazi.git
