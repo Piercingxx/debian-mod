@@ -43,7 +43,7 @@ function msg_box() {
 function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
         --menu "Run Options In Order:" 0 0 0 \
-        "Install"                                "Update System & Dependencies " \
+        "Install"                               "Update PiercingXX Debian" \
         "Nvidia Driver"                         "Install Nvidia Drivers" \
         "Optional Surface Kernel"               "Microsoft Surface Kernal" \
         "Hyprland"                              "**Currently Broken** Install Hyprland & All Dependencies" \
@@ -64,6 +64,13 @@ while true; do
                 sudo ./step-1.sh
                 wait
                 cd "$builddir" || exit
+            # Install Apps & Dependencies
+                echo -e "${YELLOW}Installing Apps & Dependencies...${NC}"
+                cd scripts || exit
+                chmod u+x apps.sh
+                sudo ./apps.sh
+                wait
+                cd "$builddir" || exit
             # Apply Piercing Rice
                 echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
                 rm -rf piercing-dots
@@ -73,20 +80,13 @@ while true; do
                 ./install.sh
                 wait
                 cd "$builddir" || exit
-            # Install Apps & Dependencies
-                echo -e "${YELLOW}Installing Apps & Dependencies...${NC}"
-                cd scripts || exit
-                chmod u+x apps.sh
-                sudo ./apps.sh
-                wait
-                cd "$builddir" || exit
             # Re-apply Piercing Rice
                 cd piercing-dots/scripts || exit
                 ./gnome-customizations.sh
                 wait
                 cd "$builddir" || exit
                 rm -rf piercing-dots
-            msg_box "System will reboot now. Re-run the script after reboot to continue."
+            msg_box "System will reboot now."
             sudo reboot
             ;;
         "Nvidia Driver")
