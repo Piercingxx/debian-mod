@@ -43,7 +43,7 @@ function msg_box() {
 function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
         --menu "Run Options In Order:" 0 0 0 \
-        "Step 1"                                "Update System & Dependencies " \
+        "Install"                                "Update System & Dependencies " \
         "Nvidia Driver"                         "Install Nvidia Drivers" \
         "Optional Surface Kernel"               "Microsoft Surface Kernal" \
         "Hyprland"                              "**Currently Broken** Install Hyprland & All Dependencies" \
@@ -56,22 +56,31 @@ while true; do
     echo -e "${GREEN}Welcome ${username}${NC}\n"
     choice=$(menu)
     case $choice in
-        "Step 1")
+        "Install")
             echo -e "${YELLOW}Updating System...${NC}"
             # Install Gnome and Dependencies
                 cd scripts || exit
                 chmod u+x step-1.sh
                 sudo ./step-1.sh
                 wait
-                chmod u+x apps.sh
-                sudo ./apps.sh
-                wait
-                cd   "$builddir" || exit
-            # Re-apply Piercing Rice
+                cd "$builddir" || exit
+            # Apply Piercing Rice
+                echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
                 rm -rf piercing-dots
                 git clone --depth 1 https://github.com/Piercingxx/piercing-dots.git
                 chmod -R u+x piercing-dots
-                chown -R "$username":"$username" piercing-dots
+                cd piercing-dots || exit
+                ./install.sh
+                wait
+                cd "$builddir" || exit
+            # Install Apps & Dependencies
+                echo -e "${YELLOW}Installing Apps & Dependencies...${NC}"
+                cd scripts || exit
+                chmod u+x apps.sh
+                sudo ./apps.sh
+                wait
+                cd "$builddir" || exit
+            # Re-apply Piercing Rice
                 cd piercing-dots/scripts || exit
                 ./gnome-customizations.sh
                 wait

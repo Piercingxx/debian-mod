@@ -41,7 +41,7 @@ builddir=$(pwd)
 
 # Update System
     echo -e "${YELLOW}Updating System...${NC}"  
-        sudo apt update && upgrade -y
+        sudo apt update && sudo apt upgrade -y || true
         wait
         sudo apt full-upgrade -y
         wait
@@ -51,7 +51,7 @@ builddir=$(pwd)
         sudo apt --fix-broken install -y
         wait
         sudo apt autoremove -y
-        sudo apt update && upgrade -y
+        sudo apt update && sudo apt upgrade -y || true
     # Check if nala is installed
         if ! command_exists nala; then
             echo "nala is not installed. Installing now..."
@@ -160,13 +160,11 @@ EOF
         rm -rf gnome-shell-extensions-useless-gaps
     # Just Perfection
         gnome-extensions-cli install just-perfection-desktop@just-perfection
-        git clone https://gitlab.gnome.org/jrahmatzadeh/just-perfection/-/archive/main/just-perfection-main.zip
-        unzip just-perfection-main.zip
-        chmod -R u+x just-perfection-main
-        cd just-perfection-main || exit
-        ./scripts/build.sh -i
-        cd "$builddir" || exit
-        rm -rf just-perfection-main
+        wget https://extensions.gnome.org/extension-data/just-perfection-desktopjust-perfection.v34.shell-extension.zip
+        unzip just-perfection-desktopjust-perfection.v34.shell-extension.zip
+        chmod -R u+x just-perfection-desktop@just-perfection
+        mv just-perfection-desktop@just-perfection ~/.local/share/gnome-shell/extensions/
+        rm just-perfection-desktopjust-perfection.v34.shell-extension.zip
     # Workspaces Buttons with App Icons
         git clone https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main
         unzip workspaces-by-open-apps-main.zip
@@ -188,19 +186,8 @@ EOF
         cd "$builddir" || exit
         rm -rf nautilus-open-any-terminal
 
-# Apply Piercing Rice
-    echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
-        rm -rf piercing-dots
-        git clone --depth 1 https://github.com/Piercingxx/piercing-dots.git
-        chmod -R u+x piercing-dots
-        chown -R "$username":"$username" piercing-dots
-        cd piercing-dots || exit
-        ./install.sh
-        cd "$builddir" || exit
-        rm -rf piercing-dots
-
 # Overkill is underrated 
-    sudo apt update && sudo apt upgrade -y
+    sudo apt update && sudo apt upgrade -y || true
     wait
     sudo apt full-upgrade -y
     wait
@@ -210,6 +197,6 @@ EOF
     sudo apt --fix-broken install -y
     wait
     sudo apt autoremove -y
-    sudo apt update && sudo apt upgrade -y
+    sudo apt update && sudo apt upgrade -y || true
     wait
     flatpak update -y
