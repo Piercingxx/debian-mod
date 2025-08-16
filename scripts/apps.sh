@@ -106,8 +106,6 @@ flatpak update
 # Apply Beautiful Bash
     echo -e "${YELLOW}Installing Beautiful Bash...${NC}"
     git clone https://github.com/christitustech/mybash
-        chmod -R u+x mybash
-        chown -R "$username":"$username" mybash
         cd mybash || exit
         ./setup.sh
         wait
