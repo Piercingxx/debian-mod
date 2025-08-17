@@ -58,6 +58,10 @@ while true; do
     case $choice in
         "Install")
             echo -e "${YELLOW}Updating System...${NC}"
+            #Turn off sleep/suspend to avoid interruptions
+                gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'false'
+                gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'false'
+                gsettings set org.gnome.settings-daemon.plugins.power idle-dim 'false'
             # Install Gnome and Dependencies
                 cd scripts || exit
                 chmod u+x step-1.sh
