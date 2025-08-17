@@ -64,13 +64,6 @@ while true; do
                 sudo ./step-1.sh
                 wait
                 cd "$builddir" || exit
-            # Install Apps & Dependencies
-                echo -e "${YELLOW}Installing Apps & Dependencies...${NC}"
-                cd scripts || exit
-                chmod u+x apps.sh
-                sudo ./apps.sh
-                wait
-                cd "$builddir" || exit
             # Apply Piercing Rice
                 echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
                 rm -rf piercing-dots
@@ -78,6 +71,13 @@ while true; do
                 chmod -R u+x piercing-dots
                 cd piercing-dots || exit
                 ./install.sh
+                wait
+                cd "$builddir" || exit
+            # Install Apps & Dependencies
+                echo -e "${YELLOW}Installing Apps & Dependencies...${NC}"
+                cd scripts || exit
+                chmod u+x apps.sh
+                sudo ./apps.sh
                 wait
                 cd "$builddir" || exit
             # Re-apply Piercing Rice
