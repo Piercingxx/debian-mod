@@ -58,7 +58,7 @@ while true; do
     case $choice in
         "Install")
             echo -e "${YELLOW}Updating System...${NC}"
-            #Turn off sleep/suspend to avoid interruptions
+            # Turn off sleep/suspend to avoid interruptions
                 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'false'
                 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'false'
                 gsettings set org.gnome.settings-daemon.plugins.power idle-dim 'false'
@@ -72,8 +72,8 @@ while true; do
                 echo -e "${YELLOW}Applying PiercingXX Gnome Customizations...${NC}"
                 rm -rf piercing-dots
                 git clone --depth 1 https://github.com/Piercingxx/piercing-dots.git
-                chmod -R u+x piercing-dots
                 cd piercing-dots || exit
+                chmod u+x install.sh
                 ./install.sh
                 wait
                 cd "$builddir" || exit
@@ -84,7 +84,7 @@ while true; do
                 sudo ./apps.sh
                 wait
                 cd "$builddir" || exit
-            # Re-apply Piercing Rice
+            # Apply Piercing Gnome Customizations as User
                 cd piercing-dots/scripts || exit
                 ./gnome-customizations.sh
                 wait
