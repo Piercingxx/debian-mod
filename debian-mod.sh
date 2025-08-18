@@ -91,7 +91,6 @@ while true; do
                 cd "$builddir" || exit
             # Replace .bashrc
                 cp -f piercing-dots/resources/bash/.bashrc /home/"$username"/.bashrc
-                chown "$username":"$username" /home/"$username"/.bashrc
                 source ~/.bashrc
             # Clean Up
                 rm -rf piercing-dots

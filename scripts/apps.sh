@@ -46,7 +46,7 @@ flatpak update
 
     # Install Yazi - Rust build issues, temp usage of snap required 🤮
     sudo apt install snapd -y
-    sudo snap install snapd -y
+    sudo snap install snapd
     sudo apt update && sudo apt upgrade -y || true
     sudo snap install yazi --candidate --classic
 
