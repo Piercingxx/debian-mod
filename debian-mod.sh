@@ -8,7 +8,7 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# Function to cache sudo credentials
+# Cache sudo credentials
 cache_sudo_credentials() {
     echo "Caching sudo credentials for script execution..."
     sudo -v
@@ -30,9 +30,6 @@ fi
 
 username=$(id -u -n 1000)
 builddir=$(pwd)
-
-# Cache sudo credentials
-cache_sudo_credentials
 
 # Function to display a message box
 function msg_box() {

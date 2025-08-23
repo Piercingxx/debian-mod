@@ -27,6 +27,7 @@ flatpak update
 
 # Installing important things && stuff && some dependencies
     echo "Installing Apps & Dependencies"
+    sudo apt install fwupd -y
     flatpak install flathub net.waterfox.waterfox -y
     flatpak install flathub md.obsidian.Obsidian -y
     flatpak install flathub org.libreoffice.LibreOffice -y
