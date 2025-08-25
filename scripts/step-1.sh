@@ -4,6 +4,40 @@
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
+install_starship_and_fzf() {
+    if ! command_exists starship; then
+        if ! curl -sS https://starship.rs/install.sh | sh; then
+            print_colored "$RED" "Something went wrong during starship install!"
+            exit 1
+        fi
+    else
+        printf "Starship already installed\n"
+    fi
+
+    if ! command_exists fzf; then
+        if [ -d "$HOME/.fzf" ]; then
+            print_colored "$YELLOW" "FZF directory already exists. Skipping installation."
+        else
+            git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+            ~/.fzf/install
+        fi
+    else
+        printf "Fzf already installed\n"
+    fi
+}
+
+install_zoxide() {
+    if ! command_exists zoxide; then
+        if ! curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh; then
+            print_colored "$RED" "Something went wrong during zoxide install!"
+            exit 1
+        fi
+    else
+        printf "Zoxide already installed\n"
+    fi
+}
+
+
 # Create Directories if needed
     # font directory
         if [ ! -d "$HOME/.fonts" ]; then
@@ -71,6 +105,8 @@ builddir=$(pwd)
 # Install dependencies
     sudo apt install wget gpg -y 
     sudo apt install zip unzip gzip tar -y
+    sudo apt install bash bash-completion -y
+    sudo apt install tar bat tree multitail fastfetch fontconfig trash-cli -y
     sudo apt install build-essential -y
     sudo apt install make -y
     sudo apt install gcc -y
@@ -105,6 +141,8 @@ builddir=$(pwd)
     sudo apt install gparted -y
     sudo apt install gh -y
     sudo apt install papirus-icon-theme -y
+    install_starship_and_fzf
+    install_zoxide
 
 # Install Rust
     #curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -147,10 +185,6 @@ EOF
         ./build.sh -i
         cd "$builddir" || exit
         rm -rf super-key
-    # App Icons Taskbar
-        wget https://gitlab.com/AndrewZaech/aztaskbar/-/archive/main/aztaskbar-main.tar
-        chmod u+x aztaskbar-main.tar
-        gnome-extensions install aztaskbar-main.tar
     # Useless Gaps
         git clone https://github.com/mipmip/gnome-shell-extensions-useless-gaps.git
         chmod -R u+x nome-shell-extensions-useless-gaps

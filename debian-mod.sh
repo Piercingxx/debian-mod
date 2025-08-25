@@ -4,29 +4,44 @@
 # Define colors for whiptail
 
 # Function to check if a command exists
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
+    command_exists() {
+        command -v "$1" >/dev/null 2>&1
+    }
 
 # Cache sudo credentials
-cache_sudo_credentials() {
-    echo "Caching sudo credentials for script execution..."
-    sudo -v
-    # Keep sudo credentials fresh for the duration of the script
-    (while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &)
-}
+    cache_sudo_credentials() {
+        echo "Caching sudo credentials for script execution..."
+        sudo -v
+        # Keep sudo credentials fresh for the duration of the script
+        (while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &)
+    }
 
-# Checks for active network connection
-if [[ -n "$(command -v nmcli)" && "$(nmcli -t -f STATE g)" != connected ]]; then
-    awk '{print}' <<<"Network connectivity is required to continue."
-    exit
-fi
+# Check for active network connection
+    if command_exists nmcli; then
+        state=$(nmcli -t -f STATE g)
+        if [[ "$state" != connected ]]; then
+            echo "Network connectivity is required to continue."
+            exit 1
+        fi
+    else
+        # Fallback: ensure at least one interface has an IPv4 address
+        if ! ip -4 addr show | grep -q "inet "; then
+            echo "Network connectivity is required to continue."
+            exit 1
+        fi
+    fi
+        # Additional ping test to confirm internet reachability
+        if ! ping -c 1 -W 1 8.8.8.8 >/dev/null 2>&1; then
+            echo "Network connectivity is required to continue."
+            exit 1
+        fi
+
 
 # Install required tools for TUI
-if ! command -v whiptail &> /dev/null; then
-    echo -e "${YELLOW}Installing whiptail...${NC}"
-    apt install whiptail -y
-fi
+    if ! command -v whiptail &> /dev/null; then
+        echo -e "${YELLOW}Installing whiptail...${NC}"
+        apt install whiptail -y
+    fi
 
 username=$(id -u -n 1000)
 builddir=$(pwd)
@@ -40,7 +55,7 @@ function msg_box() {
 function menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Main Menu" \
         --menu "Run Options In Order:" 0 0 0 \
-        "Install"                               "Update PiercingXX Debian" \
+        "Install"                               "Install PiercingXX Debian" \
         "Nvidia Driver"                         "Install Nvidia Drivers (Do not install on a Surface Device)" \
         "Optional Surface Kernel"               "Microsoft Surface Kernal" \
         "Hyprland"                              "**Currently Broken** Install Hyprland & All Dependencies" \
