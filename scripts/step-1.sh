@@ -4,7 +4,7 @@
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
-install_starship_and_fzf() {
+install_starship() {
     if ! command_exists starship; then
         if ! curl -sS https://starship.rs/install.sh | sh; then
             print_colored "$RED" "Something went wrong during starship install!"
@@ -12,17 +12,6 @@ install_starship_and_fzf() {
         fi
     else
         printf "Starship already installed\n"
-    fi
-
-    if ! command_exists fzf; then
-        if [ -d "$HOME/.fzf" ]; then
-            print_colored "$YELLOW" "FZF directory already exists. Skipping installation."
-        else
-            git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-            ~/.fzf/install
-        fi
-    else
-        printf "Fzf already installed\n"
     fi
 }
 
@@ -141,7 +130,8 @@ install_zoxide() {
     sudo apt install gparted -y
     sudo apt install gh -y
     sudo apt install papirus-icon-theme -y
-    install_starship_and_fzf
+    sudo apt install fzf -y
+    install_starship
     install_zoxide
 
 # Install Rust
