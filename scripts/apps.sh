@@ -105,6 +105,19 @@ flatpak update
     curl -fsSL https://tailscale.com/install.sh | sh
     wait
 
+# Docker
+    sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release -y
+    sudo install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    sudo chmod a+r /etc/apt/keyrings/docker.gpg
+    sudo apt update
+    sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+    # Add current user to the docker group (optional)
+    sudo usermod -aG docker "$USER"
+    # Note: you may need to log out and back in for the group change to take effect
+
+
 # Overkill is underrated 
     sudo apt update && sudo apt upgrade -y || true
     wait

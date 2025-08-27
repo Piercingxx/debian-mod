@@ -109,6 +109,7 @@ install_zoxide() {
     sudo apt install tar bat tree multitail fastfetch fontconfig trash-cli -y
     sudo apt install build-essential -y
     sudo apt install make -y
+    sudo apt install gettext -y
     sudo apt install gcc -y
     sudo apt install curl -y
     sudo apt install cargo -y
@@ -144,7 +145,7 @@ install_zoxide() {
     install_starship_and_fzf
     install_zoxide
 
-# Install Rust
+# Install Rust - Errored currently
     #curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     #source $HOME/.cargo/env
     #rustup update stable
@@ -169,7 +170,6 @@ EOF
     chmod u+x fonts.sh
     sudo ./fonts.sh
     wait
-    cd "$builddir" || exit
 
 # Extensions
     echo "Gnome Extensions"
@@ -180,33 +180,36 @@ EOF
         sudo apt install gnome-shell-extension-tiling-assistant -y
     # Super Key
         git clone https://github.com/Tommimon/super-key.git
-        chmod -R u+x super-key
         cd super-key || exit
         ./build.sh -i
         cd "$builddir" || exit
         rm -rf super-key
     # Useless Gaps
         git clone https://github.com/mipmip/gnome-shell-extensions-useless-gaps.git
-        chmod -R u+x nome-shell-extensions-useless-gaps
         cd gnome-shell-extensions-useless-gaps || exit
         sudo ./install.sh local-install
         cd "$builddir" || exit
         rm -rf gnome-shell-extensions-useless-gaps
     # Just Perfection
-        gnome-extensions-cli install just-perfection-desktop@just-perfection
         wget https://extensions.gnome.org/extension-data/just-perfection-desktopjust-perfection.v34.shell-extension.zip
         unzip just-perfection-desktopjust-perfection.v34.shell-extension.zip
-        chmod -R u+x just-perfection-desktop@just-perfection
         mv just-perfection-desktop@just-perfection ~/.local/share/gnome-shell/extensions/
         rm just-perfection-desktopjust-perfection.v34.shell-extension.zip
     # Workspaces Buttons with App Icons
         git clone https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main
         unzip workspaces-by-open-apps-main.zip
-        chmod -R u+x workspaces-by-open-apps-main
         cd workspaces-by-open-apps-main || exit
         sudo ./install.sh local-install
         cd "$builddir" || exit
         rm -rf workspaces-by-open-apps-main
+    # Tailscale QS
+        git clone https://github.com/joaophi/tailscale-gnome-qs.git
+        cd tailscale-gnome-qs || exit
+        make build
+        make install
+        cd "$builddir" || exit
+        rm -rf tailscale-gnome-qs
+        sudo tailscale set --operator="$username"
     # Nautilus Customization
         sudo apt install gnome-sushi -y
         sudo apt install imagemagick nautilus-image-converter -y
