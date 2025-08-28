@@ -1,34 +1,49 @@
-#!/bin/bash
-# https://github.com/PiercingXX
+#!/usr/bin/env bash
+# Install Nvidia drivers and CUDA on Debian 13
+# https://github.com/piercingxx
 
-# Check if Script is Run as Root
+set -euo pipefail
+
+# Verify we are running as root
 if [[ $EUID -ne 0 ]]; then
-  echo "You must be a root user to run this script, please run sudo su then try again" 2>&1
-  exit 1
+	echo "This script must be run as root." >&2
+	exit 1
 fi
 
-username=$(id -u -n 1000)
-builddir=$(pwd)
+echo "Installing Nvidia drivers and CUDA..."
 
+# Update package lists
+apt update
 
-echo "Installing Nvidia Drivers, be patient this will take a while"
+# Install the latest LTS driver (535 at the time of writing)
+apt install -y \
+	nvidia-driver-535 \
+	nvidia-dkms-535 \
+	nvidia-settings \
+	nvidia-utils-535
 
-# Video card drivers
-  wget https://developer.download.nvidia.com/compute/cuda/12.3.1/local_installers/cuda-repo-debian12-12-3-local_12.3.1-545.23.08-1_amd64.deb
-  dpkg -i cuda-repo-debian12-12-3-local_12.3.1-545.23.08-1_amd64.deb
-  wait
-  cp /var/cuda-repo-debian12-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
-  apt update && upgrade -y
-  wait
-  sudo apt install nvidia-kernel-open-dkms nvidia-driver nvidia-opencl-icd linux-headers-amd64 libnvidia-gl-535 libvulkan1 libvulkan1:i386 libnvidia-gl-535:i386 firmware-misc-nonfree nvidia-installer-cleanup -y
-  apt update && upgrade -y
-  wait
-  sudo apt install cuda-toolkit-12-3 cuda-drivers nvidia-kernel-open-dkms -y
-  flatpak install flathub org.freedesktop.Platform.GL.nvidia-545-29-06 -y
+# Install CUDA 13.0 toolkit
+CUDA_REPO_PKG="cuda-repo-debian13-13-0-local_13.0.0-580.65.06-1_amd64.deb"
 
-# necessary for steam
-  sudo apt install libgl1-nvidia-glvnd-glx:i386 -y
-  rm cuda-repo-debian12-12-3-local_12.3.1-545.23.08-1_amd64.deb
-  apt update && upgrade -y 
-  wait
-sudo reboot
+# Download the CUDA repository package
+wget https://developer.download.nvidia.com/compute/cuda/13.0.0/local_installers/${CUDA_REPO_PKG}
+
+# Install the package
+dpkg -i ${CUDA_REPO_PKG}
+
+# Copy the keyring for the CUDA repository
+cp /var/cuda-repo-debian13-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
+
+# Update apt cache again and install the toolkit
+apt update
+apt install -y cuda-toolkit-13-0
+
+# Install 32‑bit libraries for Steam (if you use Steam)
+apt install -y libgl1-nvidia-glvnd-glx:i386
+
+# Clean up
+rm -f ${CUDA_REPO_PKG}
+apt autoremove -y
+
+echo "Rebooting to apply changes..."
+reboot

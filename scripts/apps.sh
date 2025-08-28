@@ -51,7 +51,6 @@ flatpak update
     sudo apt update && sudo apt upgrade -y || true
     sudo snap install yazi --candidate --classic
 
-
 # Install Gnome-extensions-cli
     pipx install gnome-extensions-cli --system-site-packages
 
@@ -116,7 +115,6 @@ flatpak update
     # Add current user to the docker group (optional)
     sudo usermod -aG docker "$USER"
     # Note: you may need to log out and back in for the group change to take effect
-
 
 # Overkill is underrated 
     sudo apt update && sudo apt upgrade -y || true

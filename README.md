@@ -1,33 +1,44 @@
-# Debian‑mod
+# Debian‑mod.sh
 
-Automates the installation of a fully‑featured Debian workstation, including optional GPU drivers, Mircosoft Surface support, Hyprland, and a curated set of developer tools.
-
-> **NOTE** – This repository is tailored for Debian Trixie Stable.  
-> If you are using a different Debian release, some scripts may need adjustments.
+Automates the installation of a fully‑featured Debian workstation, including optional GPU drivers, Mircosoft Surface support, Hyprland, and a curated set of workstation tools.
 
 ---
 
-## Table of Contents
+## 📦 Overview
 
-1. [Prerequisites](#prerequisites)
-2. [Installation](#installation)
-3. [Optional Scripts](#optional-scripts)
-4. [Hardware‑Specific Notes](#hardware‑specific-notes)
-5. [Post‑Installation](#post‑installation)
-6. [Credits](#credits)
-7. [Troubleshooting](#troubleshooting)
+`debian-mod.sh` is a one‑step installer that automates the setup of a fully‑featured Debian workstation.  
+It installs:
+
+- Core system packages (GNOME, developer tools, etc.)
+- Optional GPU drivers (NVIDIA)
+- Microsoft Surface kernel modules
+- Hyprland
+- A curated set of dotfiles from the [Piercing‑Dots](https://github.com/PiercingXX/Piercing-Dots) repo, including:
+	  - A curated collection of dotfiles 
+	  - One‑step distro-agnostic maintenance script for Linux.
+	  - A fully‑featured Hyprland setup
+	  - Minimal Neovim with Yazi file manager
+	  - GIMP custom keybindings
+	  - Ulauncher bound to the SUPER key***
+	  - Aura color theme
+
+> The script is designed for **x86_64** machines. A mobile version is coming soon.
+
+
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
-1. A fresh Debian 13 Trixie installation with **GNOME** (other DEs may break the scripts).  
-2. Your computer this is valid and tested on x86 devices (mobile arch version coming soon).
-3. About an hour.
+| Item | Why it matters | How to check |
+|------|----------------|--------------|
+| Fresh Debian 13 Trixie | The script assumes a clean install | `lsb_release -a` |
+| GNOME desktop | Some scripts rely on GNOME utilities | `gnome-shell --version` |
+| Internet connection | Packages are fetched from the network | `ping -c 1 debian.org` |
 
 ---
 
-## Installation
+## 🚀 Installation
 
 ```bash
 # 1️⃣  Install Git
@@ -48,37 +59,76 @@ cd debian-mod
 
 ---
 
-## Optional Scripts
+## 🔧 Usage
 
-| Script | Purpose | When to Run |
-|--------|---------|-------------|
-| `nvidia.sh` | Installs proprietary NVIDIA drivers. | Do not install on a Microsoft Surface. |
-| `Surface.sh` | Installs Microsoft Surface kernel modules. | Only for use with Surface devices. |
-| `hyprland-setup.sh` | Installs Hyprland and related packages. | Pushing a new update soon. |
-| `testing.sh` | Switches the system to Debian Testing. | Do not use unless you know how to fix your computes when it breaks. |
+```bash
+./install.sh
+```
 
+| Option      | Description                                         |
+| ----------- | --------------------------------------------------- |
+| `--dry-run` | Show what would be installed without making changes |
+| `--help`    | Display the help message                            |
 
 ---
 
-## Hardware‑Specific Notes
+## 📦 Optional Scripts
+
+| Script | Purpose | When to Run |
+|--------|---------|-------------|
+| `nvidia.sh` | Installs proprietary NVIDIA drivers | **Do not** run on Microsoft Surface devices |
+| `Surface.sh` | Installs Microsoft Surface kernel modules | Only for Surface hardware |
+| `hyprland-setup.sh` | Installs Hyprland and related packages | Use when you want a Wayland session |
+| `testing.sh` | Switches the system to Debian Testing | Only if you’re comfortable troubleshooting |
+
+---
+
+## 🔌 Hardware‑Specific Notes
 
 - **Steam**: Install Steam *before* running `nvidia.sh`. Steam must be fully installed and updated first.
-- **Surface Devices**: Skip `nvidia.sh` you want to break your system at the next update.
+- **Surface Devices**: Skip `nvidia.sh` to avoid breaking your system on the next update.
 - **Multiple Hard Drives**: Edit `/etc/fstab` to auto‑mount additional drives at boot.
 
 ---
 
-## Post‑Installation
+## 🎉 Post‑Installation
 
-- **Hyprland**: If you installed Hyprland, log out of GNOME and select Hyprland from the login screen.
-- **Custom Configs**: The script pulls in configurations from the [Piercing‑Dots](https://github.com/PiercingXX/Piercing-Dots) repo, including:
-  - A fully‑featured Hyprland setup
-  - Neovim with Yazi file manager
-  - GIMP custom keybindings
-  - Ulauncher bound to the SUPER key
-  - Aura color theme
+- **Hyprland**: Log out of GNOME, pick Hyprland at login, and enjoy a Wayland session that actually works.
+- Make sure all your extensions are installed.
+
 
 ---
 
-## Credits
+## 🙏 Credits
+
 - **Linux‑Surface** – Surface kernel bits from the [linux‑surface](https://github.com/linux-surface/linux-surface/wiki) project, integrated into this script.
+- **Piercing‑Dots** – Dotfiles and configurations that makes the workstation usable.
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repo.
+2. Create a feature branch (`git checkout -b feature/your-feature`).
+3. Commit your changes.
+4. Open a Pull Request.
+
+Please keep the [maintenance.sh](vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/code/electron-browser/workbench/workbench.html) script **POSIX‑friendly** and avoid hard‑coding paths.
+
+---
+
+## 📄 License
+
+MIT © PiercingXX  
+See the LICENSE file for details.
+
+---
+
+## 📞 Support & Contact
+  
+*Don't bothering me. I’ve got better things to do than explain why I didn't add a comment somewhere.* If you have suggestions, fork, hack, PR. I'd love to check it out.
+
+---
+
+
+*** In Gnome you'll need to manually bind it using the Super Key extension
