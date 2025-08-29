@@ -96,7 +96,6 @@ cd debian-mod
 - **Hyprland**: Log out of GNOME, pick Hyprland at login, and enjoy a Wayland session that actually works.
 - Make sure all your extensions are installed.
 
-
 ---
 
 ## 🙏 Credits
@@ -108,10 +107,7 @@ cd debian-mod
 
 ## 🤝 Contributing
 
-1. Fork the repo.
-2. Create a feature branch (`git checkout -b feature/your-feature`).
-3. Commit your changes.
-4. Open a Pull Request.
+If you have suggestions, fork, hack, PR. I'd love to check it out.
 
 Please keep the [maintenance.sh](vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/code/electron-browser/workbench/workbench.html) script **POSIX‑friendly** and avoid hard‑coding paths.
 
@@ -126,7 +122,7 @@ See the LICENSE file for details.
 
 ## 📞 Support & Contact
   
-*Don't bothering me. I’ve got better things to do than explain why I didn't add a comment somewhere.* If you have suggestions, fork, hack, PR. I'd love to check it out.
+*Don't*
 
 ---
 
