@@ -45,12 +45,6 @@ flatpak update
     flatpak install flathub com.flashforge.FlashPrint -y
     flatpak install flathub com.synology.synology-note-station -y
 
-    # Install Yazi - Rust build issues, temp usage of snap required 🤮
-    sudo apt install snapd -y
-    sudo snap install snapd
-    sudo apt update && sudo apt upgrade -y || true
-    sudo snap install yazi --candidate --classic
-
 # Install Gnome-extensions-cli
     pipx install gnome-extensions-cli --system-site-packages
 
