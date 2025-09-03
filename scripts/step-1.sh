@@ -163,11 +163,6 @@ install_zoxide() {
     cd "$BUILD_DIR" || exit
     rm -rf "$YAZI_DIR"
 
-# Install Rust - Errored currently
-    #curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    #source $HOME/.cargo/env
-    #rustup update stable
-
 # Remove unwanted apps
     sudo apt remove gnome-terminal --purge -y
     sudo apt remove firefox --purge -y
