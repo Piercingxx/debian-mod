@@ -130,7 +130,9 @@ install_zoxide() {
     sudo apt install gparted -y
     sudo apt install gh -y
     sudo apt install papirus-icon-theme -y
+    # Bash Stuff
     sudo apt install fzf -y
+    sudo apt install exa -y
     install_starship
     install_zoxide
 
