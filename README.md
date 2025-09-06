@@ -13,7 +13,7 @@ It installs:
 - Optional GPU drivers (NVIDIA)
 - Microsoft Surface kernel modules
 - Hyprland
-- A curated set of dotfiles from the [Piercing‑Dots](https://github.com/PiercingXX/Piercing-Dots) repo, including:
+- Dotfiles from the [Piercing‑Dots](https://github.com/PiercingXX/Piercing-Dots) repo, including:
 	  - A curated collection of dotfiles 
 	  - One‑step distro-agnostic maintenance script for Linux.
 	  - A fully‑featured Hyprland setup
