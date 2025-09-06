@@ -17,9 +17,10 @@ It installs:
   
 	  - A curated collection of dotfiles 
 	  - One‑step distro-agnostic maintenance script for Linux.
-	  - A fully‑featured Hyprland setup
+	  - A fully‑featured Hyprland setup with waybar
+  	  - Fully customized distro-agnostic .bashrc with all the best features
 	  - Minimal Neovim with Yazi file manager
-	  - GIMP custom keybindings
+	  - GIMP custom layout with default keybinds
 	  - Ulauncher bound to the SUPER key***
 	  - Aura color theme
 
