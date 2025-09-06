@@ -14,6 +14,7 @@ It installs:
 - Microsoft Surface kernel modules
 - Hyprland
 - Dotfiles from the [Piercing‑Dots](https://github.com/PiercingXX/Piercing-Dots) repo, including:
+  
 	  - A curated collection of dotfiles 
 	  - One‑step distro-agnostic maintenance script for Linux.
 	  - A fully‑featured Hyprland setup
