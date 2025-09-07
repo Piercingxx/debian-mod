@@ -44,6 +44,7 @@ flatpak update
     flatpak install --noninteractive flathub io.github.realmazharhussain.GdmSettings -y
     flatpak install flathub com.flashforge.FlashPrint -y
     flatpak install flathub com.synology.synology-note-station -y
+    flatpak install flathub org.gnome.meld -y
 
 # Install Gnome-extensions-cli
     pipx install gnome-extensions-cli --system-site-packages

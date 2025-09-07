@@ -92,15 +92,8 @@ install_zoxide() {
     wait
 
 # Install dependencies
-    sudo apt install wget gpg -y 
-    sudo apt install zip unzip gzip tar -y
-    sudo apt install bash bash-completion -y
-    sudo apt install tar bat tree multitail fastfetch fontconfig trash-cli -y
+    sudo apt install wget gpg zip unzip gzip tar make curl gcc gettext -y
     sudo apt install build-essential -y
-    sudo apt install make -y
-    sudo apt install gettext -y
-    sudo apt install gcc -y
-    sudo apt install curl -y
     sudo apt install pipx -y
     pipx install gnome-extensions-cli --system-site-packages
     pipx ensurepath
@@ -131,10 +124,12 @@ install_zoxide() {
     sudo apt install gh -y
     sudo apt install papirus-icon-theme -y
     # Bash Stuff
+    sudo apt install bash bash-completion bat tree multitail fastfetch fontconfig trash-cli -y
     sudo apt install fzf -y
-    sudo apt install exa -y
     install_starship
     install_zoxide
+    # Install exa via cargo...exa is not in apt on Debian 13 yet sudo apt install exa -y
+    cargo install exa
 
 # Install Yazi via cargo
     # Ensure Rust is installed
