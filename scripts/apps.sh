@@ -46,6 +46,10 @@ flatpak update
     flatpak install flathub com.synology.synology-note-station -y
     flatpak install flathub org.gnome.meld -y
 
+# Firewall
+    sudo apt install ufw -y
+    sudo ufw allow OpenSSH
+
 # Install Gnome-extensions-cli
     pipx install gnome-extensions-cli --system-site-packages
 

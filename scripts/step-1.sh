@@ -4,28 +4,6 @@
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
-install_starship() {
-    if ! command_exists starship; then
-        if ! curl -sS https://starship.rs/install.sh | sh; then
-            print_colored "$RED" "Something went wrong during starship install!"
-            exit 1
-        fi
-    else
-        printf "Starship already installed\n"
-    fi
-}
-
-install_zoxide() {
-    if ! command_exists zoxide; then
-        if ! curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh; then
-            print_colored "$RED" "Something went wrong during zoxide install!"
-            exit 1
-        fi
-    else
-        printf "Zoxide already installed\n"
-    fi
-}
-
 
 # Create Directories if needed
     # font directory
@@ -124,10 +102,7 @@ install_zoxide() {
     sudo apt install gh -y
     sudo apt install papirus-icon-theme -y
     # Bash Stuff
-    sudo apt install bash bash-completion bat tree multitail fastfetch fontconfig trash-cli -y
-    sudo apt install fzf -y
-    install_starship
-    install_zoxide
+    sudo apt install bash bash-completion bat tree multitail fastfetch fontconfig trash-cli fzf starship zoxide -y
     # Install exa via cargo...exa is not in apt on Debian 13 yet sudo apt install exa -y
     cargo install exa
 
