@@ -101,24 +101,20 @@ builddir=$(pwd)
     sudo apt install gparted -y
     sudo apt install gh -y
     sudo apt install papirus-icon-theme -y
-    # Bash Stuff
-    sudo apt install bash bash-completion bat tree multitail fastfetch fontconfig trash-cli fzf starship zoxide -y
-    # Install exa via cargo...exa is not in apt on Debian 13 yet sudo apt install exa -y
-    cargo install exa
-
-# Install Yazi via cargo
-    # Ensure Rust is installed
+# Ensure Rust is installed
     if ! command_exists cargo; then
         echo -e "${YELLOW}Installing Rust toolchain…${NC}"
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
         # Load the new cargo environment for this shell
         source "$HOME/.cargo/env"
     fi
-    # Verify cargo is now available
-    if ! command_exists cargo; then
-        echo -e "${RED}Cargo could not be found after installation. Aborting Yazi install.${NC}"
-        exit 1
-    fi
+    
+# Bash Stuff
+    sudo apt install bash bash-completion bat tree multitail fastfetch fontconfig trash-cli fzf starship zoxide -y
+    # Install exa via cargo...exa is not in apt on Debian 13 yet sudo apt install exa -y
+    cargo install exa
+
+# Install Yazi via cargo
     echo -e "${YELLOW}Installing Yazi via source build…${NC}"
     # Ensure Yazi's binary directory is in the PATH for this session
     export PATH="$HOME/.cargo/bin:$PATH"
