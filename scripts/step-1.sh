@@ -109,35 +109,11 @@ builddir=$(pwd)
         source "$HOME/.cargo/env"
     fi
     
-# Bash Stuff
-    sudo apt install bash bash-completion bat tree multitail fastfetch fontconfig trash-cli fzf starship zoxide -y
-    # Install exa via cargo...exa is not in apt on Debian 13 yet sudo apt install exa -y
-    cargo install exa
-
-# Install Yazi via cargo
-    echo -e "${YELLOW}Installing Yazi via source build…${NC}"
-    # Ensure Yazi's binary directory is in the PATH for this session
-    export PATH="$HOME/.cargo/bin:$PATH"
-    # Clone the Yazi repository (use the latest release tag)
-    YAZI_REPO="https://github.com/sxyazi/yazi.git"
-    YAZI_DIR="/tmp/yazi-build"
-    git clone --depth 1 "$YAZI_REPO" "$YAZI_DIR" || { echo -e "${RED}Failed to clone Yazi repo.${NC}"; exit 1; }
-    # Build the binary
-    cd "$YAZI_DIR" || exit
-    cargo build --release || { echo -e "${RED}Cargo build failed.${NC}"; exit 1; }
-    # Install the binary
-    sudo install -Dm755 target/release/yazi /usr/local/bin/yazi
-    # Clean up
-    cd "$BUILD_DIR" || exit
-    rm -rf "$YAZI_DIR"
-
-# Remove unwanted apps
-    sudo apt remove gnome-terminal --purge -y
-    sudo apt remove firefox --purge -y
-    sudo apt remove firefox-esr --purge -y
-    sudo apt remove evolution --purge -y
-    sudo apt remove shotwell --purge -y
-
+# Fonts Installation
+    chmod u+x fonts.sh
+    sudo ./fonts.sh
+    wait
+    
 # Add GDM Banner Message
 sudo tee -a /etc/gdm3/greeter.dconf-defaults > /dev/null <<EOF
 # - Show a login welcome message
@@ -146,11 +122,6 @@ banner-message-text='Hello Handsome'
 EOF
 # Finalizing graphical login
     sudo systemctl enable gdm3 --now
-
-# Fonts Installation
-    chmod u+x fonts.sh
-    sudo ./fonts.sh
-    wait
 
 # Extensions
     echo "Gnome Extensions"
@@ -203,6 +174,35 @@ EOF
         glib-compile-schemas /usr/share/glib-2.0/schemas
         cd "$builddir" || exit
         rm -rf nautilus-open-any-terminal
+
+# Bash Stuff
+    sudo apt install bash bash-completion bat tree multitail fastfetch fontconfig trash-cli fzf starship zoxide -y
+    # Install exa via cargo...exa is not in apt on Debian 13 yet sudo apt install exa -y
+    cargo install exa
+
+# Install Yazi via cargo
+    echo -e "${YELLOW}Installing Yazi via source build…${NC}"
+    # Ensure Yazi's binary directory is in the PATH for this session
+    export PATH="$HOME/.cargo/bin:$PATH"
+    # Clone the Yazi repository (use the latest release tag)
+    YAZI_REPO="https://github.com/sxyazi/yazi.git"
+    YAZI_DIR="/tmp/yazi-build"
+    git clone --depth 1 "$YAZI_REPO" "$YAZI_DIR" || { echo -e "${RED}Failed to clone Yazi repo.${NC}"; exit 1; }
+    # Build the binary
+    cd "$YAZI_DIR" || exit
+    cargo build --release || { echo -e "${RED}Cargo build failed.${NC}"; exit 1; }
+    # Install the binary
+    sudo install -Dm755 target/release/yazi /usr/local/bin/yazi
+    # Clean up
+    cd "$BUILD_DIR" || exit
+    rm -rf "$YAZI_DIR"
+
+# Remove unwanted apps
+    sudo apt remove gnome-terminal --purge -y
+    sudo apt remove firefox --purge -y
+    sudo apt remove firefox-esr --purge -y
+    sudo apt remove evolution --purge -y
+    sudo apt remove shotwell --purge -y
 
 # Overkill is underrated 
     sudo apt update && sudo apt upgrade -y || true
