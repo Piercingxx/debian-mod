@@ -57,7 +57,7 @@ function menu() {
         --menu "Run Options In Order:" 0 0 0 \
         "Install"                               "Install PiercingXX Debian" \
         "Nvidia Driver"                         "Install Nvidia Drivers (Do not install on a Surface Device)" \
-        "Optional Surface Kernel"               "Microsoft Surface Kernal" \
+        "Optional Surface Kernel"               "Microsoft Surface Kernel" \
         "Hyprland"                              "**Currently Broken** Install Hyprland & All Dependencies" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3

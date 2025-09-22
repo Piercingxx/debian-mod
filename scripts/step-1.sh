@@ -123,58 +123,6 @@ EOF
 # Finalizing graphical login
     sudo systemctl enable gdm3 --now
 
-# Extensions
-    echo "Gnome Extensions"
-        sudo apt install gnome-shell-extension-appindicator -y
-        sudo apt install gnome-shell-extension-gsconnect -y
-        sudo apt install gnome-shell-extension-caffeine -y
-        sudo apt install gnome-shell-extension-blur-my-shell -y
-        sudo apt install gnome-shell-extension-tiling-assistant -y
-    # Super Key
-        git clone https://github.com/Tommimon/super-key.git
-        cd super-key || exit
-        ./build.sh -i
-        cd "$builddir" || exit
-        rm -rf super-key
-    # Useless Gaps
-        git clone https://github.com/mipmip/gnome-shell-extensions-useless-gaps.git
-        cd gnome-shell-extensions-useless-gaps || exit
-        sudo ./install.sh local-install
-        cd "$builddir" || exit
-        rm -rf gnome-shell-extensions-useless-gaps
-    # Just Perfection
-        wget https://extensions.gnome.org/extension-data/just-perfection-desktopjust-perfection.v34.shell-extension.zip
-        unzip just-perfection-desktopjust-perfection.v34.shell-extension.zip
-        mv just-perfection-desktop@just-perfection ~/.local/share/gnome-shell/extensions/
-        rm just-perfection-desktopjust-perfection.v34.shell-extension.zip
-    # Workspaces Buttons with App Icons
-        git clone https://codeload.github.com/Favo02/workspaces-by-open-apps/zip/refs/heads/main
-        unzip workspaces-by-open-apps-main.zip
-        cd workspaces-by-open-apps-main || exit
-        sudo ./install.sh local-install
-        cd "$builddir" || exit
-        rm -rf workspaces-by-open-apps-main
-    # Tailscale QS
-        git clone https://github.com/joaophi/tailscale-gnome-qs.git
-        cd tailscale-gnome-qs || exit
-        make build
-        make install
-        cd "$builddir" || exit
-        rm -rf tailscale-gnome-qs
-        sudo tailscale set --operator="$username"
-    # Nautilus Customization
-        sudo apt install gnome-sushi -y
-        sudo apt install imagemagick nautilus-image-converter -y
-        sudo apt install nautilus-admin -y
-        sudo apt install gir1.2-gtk-4.0 -y
-        git clone https://github.com/Stunkymonkey/nautilus-open-any-terminal.git
-        cd nautilus-open-any-terminal || exit
-        make
-        sudo make install schema
-        glib-compile-schemas /usr/share/glib-2.0/schemas
-        cd "$builddir" || exit
-        rm -rf nautilus-open-any-terminal
-
 # Bash Stuff
     sudo apt install bash bash-completion bat tree multitail fastfetch fontconfig trash-cli fzf starship zoxide -y
     # Install exa via cargo...exa is not in apt on Debian 13 yet sudo apt install exa -y
@@ -196,6 +144,57 @@ EOF
     # Clean up
     cd "$BUILD_DIR" || exit
     rm -rf "$YAZI_DIR"
+
+# Extensions
+    echo "Gnome Extensions"
+        sudo apt install gnome-shell-extension-appindicator -y
+        sudo apt install gnome-shell-extension-gsconnect -y
+        sudo apt install gnome-shell-extension-caffeine -y
+        sudo apt install gnome-shell-extension-blur-my-shell -y
+        sudo apt install gnome-shell-extension-tiling-assistant -y
+    # Nautilus Customization
+        sudo apt install gnome-sushi -y
+        sudo apt install imagemagick nautilus-image-converter -y
+        sudo apt install nautilus-admin -y
+        sudo apt install gir1.2-gtk-4.0 -y
+        git clone https://github.com/Stunkymonkey/nautilus-open-any-terminal.git
+        cd nautilus-open-any-terminal || exit
+        make
+        sudo make install schema
+        glib-compile-schemas /usr/share/glib-2.0/schemas
+        cd "$builddir" || exit
+        rm -rf nautilus-open-any-terminal
+    # Super Key
+        git clone https://github.com/Tommimon/super-key.git
+        cd super-key || exit
+        ./build.sh -i
+        cd "$builddir" || exit
+        rm -rf super-key
+    # Useless Gaps
+        git clone https://github.com/mipmip/gnome-shell-extensions-useless-gaps.git
+        cd gnome-shell-extensions-useless-gaps || exit
+        sudo ./install.sh local-install
+        cd "$builddir" || exit
+        rm -rf gnome-shell-extensions-useless-gaps
+    # Just Perfection
+        wget https://extensions.gnome.org/extension-data/just-perfection-desktopjust-perfection.v34.shell-extension.zip
+        unzip just-perfection-desktopjust-perfection.v34.shell-extension.zip
+        mv just-perfection-desktop@just-perfection ~/.local/share/gnome-shell/extensions/
+        rm just-perfection-desktopjust-perfection.v34.shell-extension.zip
+    # Tailscale QS
+        git clone https://github.com/joaophi/tailscale-gnome-qs.git
+        cd tailscale-gnome-qs || exit
+        make build
+        make install
+        cd "$builddir" || exit
+        rm -rf tailscale-gnome-qs
+        sudo tailscale set --operator="$username"
+    # Workspaces Buttons with App Icons
+        git clone https://github.com/Favo02/workspaces-by-open-apps.git
+        cd workspaces-by-open-apps-main || exit
+        sudo ./install.sh local-install
+        cd "$builddir" || exit
+        rm -rf workspaces-by-open-apps-main
 
 # Remove unwanted apps
     sudo apt remove gnome-terminal --purge -y
