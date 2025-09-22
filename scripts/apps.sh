@@ -45,6 +45,7 @@ flatpak update
     flatpak install flathub com.flashforge.FlashPrint -y
     flatpak install flathub com.synology.synology-note-station -y
     flatpak install flathub org.gnome.meld -y
+    flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
 
 # Firewall
     sudo apt install ufw -y
