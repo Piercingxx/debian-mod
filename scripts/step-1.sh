@@ -124,9 +124,7 @@ EOF
     sudo systemctl enable gdm3 --now
 
 # Bash Stuff
-    sudo apt install bash bash-completion bat tree multitail fastfetch fontconfig trash-cli fzf starship zoxide -y
-    # Install exa via cargo...exa is not in apt on Debian 13 yet sudo apt install exa -y
-    cargo install exa
+    sudo apt install bash bash-completion bat tree multitail fastfetch fontconfig trash-cli fzf starship zoxide eza -y
 
 # Install Yazi via cargo
     echo -e "${YELLOW}Installing Yazi via source build…${NC}"
