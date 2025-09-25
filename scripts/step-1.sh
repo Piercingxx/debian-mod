@@ -162,6 +162,14 @@ EOF
         glib-compile-schemas /usr/share/glib-2.0/schemas
         cd "$builddir" || exit
         rm -rf nautilus-open-any-terminal
+        wait
+    # Workspaces Buttons with App Icons
+        git clone https://github.com/Favo02/workspaces-by-open-apps.git
+        cd workspaces-by-open-apps-main || exit
+        sudo ./install.sh local-install
+        sudo mkdir -p /root/.local/share/gnome-shell/ectensions/workspaces-by-open-apps@favo02.github.com
+        cd "$builddir" || exit
+        rm -rf workspaces-by-open-apps-main
     # Super Key
         git clone https://github.com/Tommimon/super-key.git
         cd super-key || exit
@@ -187,12 +195,6 @@ EOF
         cd "$builddir" || exit
         rm -rf tailscale-gnome-qs
         sudo tailscale set --operator="$username"
-    # Workspaces Buttons with App Icons
-        git clone https://github.com/Favo02/workspaces-by-open-apps.git
-        cd workspaces-by-open-apps-main || exit
-        sudo ./install.sh local-install
-        cd "$builddir" || exit
-        rm -rf workspaces-by-open-apps-main
 
 # Remove unwanted apps
     sudo apt remove gnome-terminal --purge -y
