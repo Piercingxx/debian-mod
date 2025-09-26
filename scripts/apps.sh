@@ -42,9 +42,10 @@ flatpak update
     flatpak install flathub io.github.shiftey.Desktop -y
     flatpak install --noninteractive flathub io.github.realmazharhussain.GdmSettings -y
     flatpak install flathub com.flashforge.FlashPrint -y
-    flatpak install flathub com.synology.synology-note-station -y
+    # flatpak install flathub com.synology.synology-note-station -y
     flatpak install flathub org.gnome.meld -y
     flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
+    flatpak install flathub com.protonvpn.www
 
 # Firewall
     sudo apt install ufw -y
