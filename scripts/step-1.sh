@@ -127,26 +127,7 @@ EOF
     sudo apt install bash bash-completion bat tree multitail fastfetch fontconfig trash-cli fzf starship zoxide eza -y
 
 # Install Yazi via cargo
-#    echo -e "${YELLOW}Installing Yazi via source build…${NC}"
-#    # Ensure Yazi's binary directory is in the PATH for this session
-#    export PATH="$HOME/.cargo/bin:$PATH"
-#    # Clone the Yazi repository (use the latest release tag)
-#    YAZI_REPO="https://github.com/sxyazi/yazi.git"
-#    YAZI_DIR="/tmp/yazi-build"
-#    git clone --depth 1 "$YAZI_REPO" "$YAZI_DIR" || { echo -e "${RED}Failed to clone Yazi repo.${NC}"; exit 1; }
-#    # Build the binary
-#    cd "$YAZI_DIR" || exit
-#    cargo build --release || { echo -e "${RED}Cargo build failed.${NC}"; exit 1; }
-#    # Install the binary
-#    sudo install -Dm755 target/release/yazi /usr/local/bin/yazi
-#    # Clean up
-#    cd "$BUILD_DIR" || exit
-#    rm -rf "$YAZI_DIR"
-
-# Install Yazi via https://github.com/dariogriffo/yazi-debian
-curl -sS https://debian.griffo.io/EA0F721D231FDD3A0A17B9AC7808B4DD62C41256.asc | gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/debian.griffo.io.gpg
-echo "deb https://debian.griffo.io/apt $(lsb_release -sc 2>/dev/null) main" | sudo tee /etc/apt/sources.list.d/debian.griffo.io.list
-sudo apt install -y yazi
+    cargo install yazi-fm yazi-cli
 
 # Extensions
     echo "Gnome Extensions"
