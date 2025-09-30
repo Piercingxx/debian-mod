@@ -125,7 +125,6 @@ EOF
 
 # Bash Stuff
     sudo apt install bash bash-completion bat tree multitail fastfetch fontconfig trash-cli fzf starship zoxide eza -y
-    sudo apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick -y
 
 # Install Yazi via cargo
     cargo install yazi-fm yazi-cli
