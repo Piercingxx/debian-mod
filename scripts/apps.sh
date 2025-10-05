@@ -47,12 +47,10 @@ flatpak update
     # flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
     flatpak install flathub com.protonvpn.www -y
 
-# Install Synology Chat from my repair script
-    cd scripts || exit
-    chmod +x ./synology-chat-build-fix-install.sh
-    ./synology-chat-build-fix-install.sh
-    wait
-    cd "$builddir" || exit
+# Install Yazi via cargo
+    cargo install yazi-fm yazi-cli
+# Install Yazi via snap
+#    sudo snap install yazi --classic --edge
 
 # Firewall
     sudo apt install ufw -y
@@ -123,6 +121,13 @@ flatpak update
     # Add current user to the docker group (optional)
     sudo usermod -aG docker "$USER"
     # Note: you may need to log out and back in for the group change to take effect
+
+# Install Synology Chat from repair script
+#    cd scripts || exit
+#    chmod +x ./synology-chat-build-fix-install.sh
+#    ./synology-chat-build-fix-install.sh
+#    wait
+#    cd "$builddir" || exit
 
 # Overkill is underrated 
     sudo apt update && sudo apt upgrade -y || true

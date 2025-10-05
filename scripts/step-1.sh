@@ -92,6 +92,9 @@ builddir=$(pwd)
     sudo apt install gparted -y
     sudo apt install gh -y
     sudo apt install papirus-icon-theme -y
+# Extras for yazi
+    sudo apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick -y
+
 # Ensure Rust is installed
     if ! command_exists cargo; then
         echo -e "${YELLOW}Installing Rust toolchain…${NC}"
@@ -99,12 +102,24 @@ builddir=$(pwd)
         # Load the new cargo environment for this shell
         source "$HOME/.cargo/env"
     fi
-    
-# Fonts Installation
-    chmod u+x fonts.sh
-    sudo ./fonts.sh
+
+# Installing fonts
+    echo "Installing Fonts"
+    cd "$builddir" || exit
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
+    wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.zip
+    unzip FiraCode.zip -d /home/"$username"/.fonts
+    unzip Meslo.zip -d /home/"$username"/.fonts
+    unzip NerdFontsSymbolsOnly.zip -d /home/"$username"/.fonts
+    sudo rm FiraCode.zip Meslo.zip NerdFontsSymbolsOnly.zip
+    sudo apt install fonts-font-awesome fonts-noto-color-emoji -y
+    sudo apt install fonts-terminus -y
+    sudo apt install fonts-noto-color-emoji -y
+# Reload Font
+    fc-cache -vf
     wait
-    
+
 # Add GDM Banner Message
 sudo tee -a /etc/gdm3/greeter.dconf-defaults > /dev/null <<EOF
 # - Show a login welcome message
@@ -116,13 +131,6 @@ EOF
 
 # Bash Stuff
     sudo apt install bash bash-completion bat tree multitail fastfetch fontconfig trash-cli fzf starship zoxide eza -y
-
-# Install Yazi via cargo
-    cargo install yazi-fm yazi-cli
-# Install Yazi via snap
-#    sudo snap install yazi --classic --edge
-# Extras for yazi
-    sudo apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick -y
 
 # Extensions
     echo "Gnome Extensions"
