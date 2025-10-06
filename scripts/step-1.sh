@@ -99,6 +99,7 @@ builddir=$(pwd)
     if ! command_exists cargo; then
         echo -e "${YELLOW}Installing Rust toolchain…${NC}"
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        rustup update
         # Load the new cargo environment for this shell
         source "$HOME/.cargo/env"
     fi
