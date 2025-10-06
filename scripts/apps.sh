@@ -48,9 +48,7 @@ flatpak update
     flatpak install flathub com.protonvpn.www -y
 
 # Install Yazi via cargo
-    cargo install yazi-fm yazi-cli
-# Install Yazi via snap
-#    sudo snap install yazi --classic --edge
+    cargo install --force --git https://github.com/sxyazi/yazi.git yazi-build
 
 # Firewall
     sudo apt install ufw -y
