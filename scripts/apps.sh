@@ -30,10 +30,8 @@ flatpak update
     sudo apt install fwupd -y
     flatpak install flathub net.waterfox.waterfox -y
     flatpak install flathub md.obsidian.Obsidian -y
-    # flatpak install flathub org.libreoffice.LibreOffice -y # default on Debian 13 uncomment for Debian 12
     flatpak install flathub org.gimp.GIMP -y
     flatpak install flathub org.darktable.Darktable -y
-    # flatpak install flathub org.gnome.SimpleScan -y # default on Debian 13 uncomment for Debian 12
     flatpak install flathub org.blender.Blender -y
     flatpak install flathub com.mattjakeman.ExtensionManager -y
     flatpak install flathub org.qbittorrent.qBittorrent -y
@@ -42,10 +40,8 @@ flatpak update
     flatpak install flathub io.github.shiftey.Desktop -y
     flatpak install --noninteractive flathub io.github.realmazharhussain.GdmSettings -y
     flatpak install flathub com.flashforge.FlashPrint -y
-    # flatpak install flathub com.synology.synology-note-station -y
     flatpak install flathub org.gnome.meld -y
     # flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
-    flatpak install flathub com.protonvpn.www -y
 
 # Install Yazi via cargo
     cargo install --force --git https://github.com/sxyazi/yazi.git yazi-build
@@ -80,6 +76,13 @@ flatpak update
     wait
     rm synology-drive-client-15724.x86_64.deb
     sudo apt --fix-broken install -y
+
+# Proton VPN
+    wget https://repo.protonvpn.com/debian/dists/unstable/main/binary-all/protonvpn-beta-release_1.0.8_all.deb
+    wait
+    sudo dpkg -i ./protonvpn-beta-release_1.0.8_all.deb && sudo apt update
+    sudo apt install proton-vpn-gnome-desktop -y
+    rm protonvpn-beta-release_1.0.8_all.deb
 
 # Steam & Discord
     # wget "https://steamcdn-a.akamaihd.net/client/installer/steam.deb"
