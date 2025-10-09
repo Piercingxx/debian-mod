@@ -41,7 +41,8 @@ flatpak update
     flatpak install --noninteractive flathub io.github.realmazharhussain.GdmSettings -y
     flatpak install flathub com.flashforge.FlashPrint -y
     flatpak install flathub org.gnome.meld -y
-    # flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
+    flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
+    flatpak install flathub com.github.xournalpp.xournalpp -y
 
 # Install Yazi via cargo
     cargo install --force --git https://github.com/sxyazi/yazi.git yazi-build
