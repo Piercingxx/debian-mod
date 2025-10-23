@@ -63,6 +63,7 @@ builddir=$(pwd)
 # Install dependencies
     sudo apt install wget gpg zip unzip gzip tar make curl gcc gettext -y
     sudo apt install build-essential -y
+    sudo apt install linux-firmware -y
     sudo apt install pipx -y
     pipx install gnome-extensions-cli --system-site-packages
     pipx ensurepath
