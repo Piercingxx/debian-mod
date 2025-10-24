@@ -96,13 +96,6 @@ while true; do
                 sudo ./apps.sh
                 wait
                 cd "$builddir" || exit
-            # Set Boot Beep
-            echo -e "${YELLOW}Setting Boot Beep...${NC}"
-                cd scripts || exit
-                chmod u+x set_boot_beep.sh
-                ./set_boot_beep.sh
-                cd "$builddir" || exit
-            echo -e "${GREEN}Boot Beep Set successfully!${NC}"
             # Apply Piercing Gnome Customizations as User
                 cd piercing-dots/scripts || exit
                 ./gnome-customizations.sh
