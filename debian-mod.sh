@@ -104,6 +104,8 @@ while true; do
             # Replace .bashrc
                 cp -f piercing-dots/resources/bash/.bashrc /home/"$username"/.bashrc
                 source ~/.bashrc
+            # Bash Stuff
+                install_bashrc_support
             # Clean Up
                 rm -rf piercing-dots
             echo -e "${GREEN}PiercingXX Gnome Customizations Applied successfully!${NC}"

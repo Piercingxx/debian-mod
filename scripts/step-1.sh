@@ -132,9 +132,6 @@ EOF
 # Finalizing graphical login
     sudo systemctl enable gdm3 --now
 
-# Bash Stuff
-    install_bashrc_support
-
 # Extensions
     echo "Gnome Extensions"
         sudo apt install gnome-shell-extension-appindicator -y
