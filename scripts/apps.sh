@@ -44,9 +44,9 @@ flatpak update
     flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
     flatpak install flathub com.github.xournalpp.xournalpp -y
 
-# Clean up broken plugins before installing
-    rm -rf ~/.config/yazi/plugins/*
+
 # Install yazi and ya
+    rm -rf ~/.config/yazi/plugins/*
     cargo install --locked yazi-cli
     yazi pkg install ya
 # Install plugins
