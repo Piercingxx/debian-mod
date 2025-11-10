@@ -66,6 +66,7 @@ builddir=$(pwd)
     sudo apt install linux-firmware -y
     sudo apt install firmware-misc-nonfree -y
     sudo apt install pipx -y
+    sudo apt install jq -y
     pipx install gnome-extensions-cli --system-site-packages
     pipx ensurepath
     wait

@@ -44,8 +44,24 @@ flatpak update
     flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
     flatpak install flathub com.github.xournalpp.xournalpp -y
 
-# Install Yazi via cargo
-    cargo install --force --git https://github.com/sxyazi/yazi.git yazi-build
+# Clean up broken plugins before installing
+    rm -rf ~/.config/yazi/plugins/*
+# Install yazi and ya
+    cargo install --locked yazi-cli
+    yazi pkg install ya
+# Install plugins
+    ya pkg add dedukun/bookmarks
+    ya pkg add yazi-rs/plugins:mount
+    ya pkg add dedukun/relative-motions
+    ya pkg add yazi-rs/plugins:chmod
+    ya pkg add yazi-rs/plugins:smart-enter
+    ya pkg add AnirudhG07/rich-preview
+    ya pkg add grappas/wl-clipboard
+    ya pkg add Rolv-Apneseth/starship
+    ya pkg add yazi-rs/plugins:full-border
+    ya pkg add uhs-robert/recycle-bin
+    ya pkg add yazi-rs/plugins:diff
+    yazi pkg upgrade
 
 # Firewall
     sudo apt install ufw -y
