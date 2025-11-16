@@ -45,10 +45,10 @@ flatpak update
     flatpak install flathub com.github.xournalpp.xournalpp -y
 
 
-# Install yazi and ya
-    rm -rf ~/.config/yazi/plugins/*
-    cargo install --locked yazi-cli
-    yazi pkg install ya
+# Install yazi
+    # Ensure new cargo environment for this shell
+        source "$HOME/.cargo/env"
+    cargo install --force --git https://github.com/sxyazi/yazi.git yazi-build
 # Install plugins
     ya pkg add dedukun/bookmarks
     ya pkg add yazi-rs/plugins:mount
@@ -61,7 +61,6 @@ flatpak update
     ya pkg add yazi-rs/plugins:full-border
     ya pkg add uhs-robert/recycle-bin
     ya pkg add yazi-rs/plugins:diff
-    yazi pkg upgrade
 
 # Firewall
     sudo apt install ufw -y
@@ -71,16 +70,7 @@ flatpak update
     pipx install gnome-extensions-cli --system-site-packages
 
 # Nvim & Depends
-    # Neovim Nightly (AppImage)
-    echo "Installing Neovim nightly"
-    mkdir -p "$HOME/.local/bin"
-    curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage \
-        -o "$HOME/.local/bin/nvim"
-    chmod u+x "$HOME/.local/bin/nvim"
-    # Ensure ~/.local/bin is in PATH for future shells
-    if ! grep -q 'export PATH="$HOME/.local/bin:$PATH"' "$HOME/.bashrc"; then
-        echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
-    fi
+    sudo apt install neovim -y
     sudo apt install lua5.4 -y
     sudo apt install python3-pip -y
 
