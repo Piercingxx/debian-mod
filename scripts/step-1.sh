@@ -71,6 +71,7 @@ builddir=$(pwd)
     pipx ensurepath
     wait
     sudo apt install gnome-shell -y
+    sudo apt install trash-cli -y
     sudo apt install kitty -y
     sudo apt install dconf* -y
     sudo apt install gnome-tweaks -y
@@ -154,37 +155,76 @@ EOF
         rm -rf nautilus-open-any-terminal
         wait
     # Workspaces Buttons with App Icons
-        git clone https://github.com/Favo02/workspaces-by-open-apps.git
-        cd workspaces-by-open-apps-main || exit
-        sudo ./install.sh local-install
-        sudo mkdir -p /root/.local/share/gnome-shell/ectensions/workspaces-by-open-apps@favo02.github.com
-        cd "$builddir" || exit
-        rm -rf workspaces-by-open-apps-main
+        git clone --depth=1 https://github.com/Favo02/workspaces-by-open-apps.git
+        cd workspaces-by-open-apps || exit 1
+        uuid=$(jq -r '.uuid' metadata.json 2>/dev/null)
+        [ -z "$uuid" ] || [ "$uuid" = "null" ] && uuid="workspaces-by-open-apps@favo02.github.com"
+        extbase="/home/$username/.local/share/gnome-shell/extensions"
+        sudo mkdir -p "$extbase/$uuid"
+        sudo rm -rf "$extbase/$uuid"/*
+        sudo cp -a ./* "$extbase/$uuid"/
+        if command -v glib-compile-schemas >/dev/null 2>&1 && [ -d "$extbase/$uuid/schemas" ]; then
+            sudo glib-compile-schemas "$extbase/$uuid/schemas" || true
+        fi
+        sudo chown -R "$username:$username" "$extbase/$uuid"
+        sudo -u "$username" gnome-extensions enable "$uuid" || true
+        cd "$builddir" || exit 1
+        rm -rf workspaces-by-open-apps
     # Super Key
-        git clone https://github.com/Tommimon/super-key.git
-        cd super-key || exit
-        ./build.sh -i
-        cd "$builddir" || exit
+        git clone --depth=1 https://github.com/Tommimon/super-key.git
+        cd super-key || exit 1
+        uuid=$(jq -r '.uuid' metadata.json 2>/dev/null)
+        [ -z "$uuid" ] || [ "$uuid" = "null" ] && uuid=$(grep -Po '(?<="uuid": ")[^"]*' metadata.json 2>/dev/null || echo "super-key@tommimon.github.com")
+        extbase="/home/$username/.local/share/gnome-shell/extensions"
+        sudo mkdir -p "$extbase/$uuid"
+        sudo rm -rf "$extbase/$uuid"/*
+        sudo cp -a ./* "$extbase/$uuid"/
+        if command -v glib-compile-schemas >/dev/null 2>&1 && [ -d "$extbase/$uuid/schemas" ]; then
+            sudo glib-compile-schemas "$extbase/$uuid/schemas" || true
+        fi
+        sudo chown -R "$username:$username" "$extbase/$uuid"
+        sudo -u "$username" gnome-extensions enable "$uuid" || true
+        cd "$builddir" || exit 1
         rm -rf super-key
-    # Useless Gaps
-        git clone https://github.com/mipmip/gnome-shell-extensions-useless-gaps.git
-        cd gnome-shell-extensions-useless-gaps || exit
-        sudo ./install.sh local-install
-        cd "$builddir" || exit
-        rm -rf gnome-shell-extensions-useless-gaps
     # Just Perfection
-        wget https://extensions.gnome.org/extension-data/just-perfection-desktopjust-perfection.v34.shell-extension.zip
-        unzip just-perfection-desktopjust-perfection.v34.shell-extension.zip
-        mv just-perfection-desktop@just-perfection ~/.local/share/gnome-shell/extensions/
-        rm just-perfection-desktopjust-perfection.v34.shell-extension.zip
+        shell_ver=$(gnome-shell --version | awk '{print $3}' | cut -d. -f1,2)
+        info=$(curl -fsSL "https://extensions.gnome.org/extension-info/?uuid=just-perfection-desktop%40just-perfection&shell_version=$shell_ver" || true)
+        if [ -z "$info" ] || [ "$(echo "$info" | jq -r '.error // empty')" != "" ]; then
+            shell_major=$(echo "$shell_ver" | cut -d. -f1)
+            info=$(curl -fsSL "https://extensions.gnome.org/extension-info/?uuid=just-perfection-desktop%40just-perfection&shell_version=$shell_major" || true)
+        fi
+        url=$(echo "$info" | jq -r '.download_url // empty')
+        if [ -n "$url" ]; then
+            tmpzip="$(mktemp --suffix=.zip)"
+            curl -fsSL "https://extensions.gnome.org${url}" -o "$tmpzip"
+            gnome-extensions install --force "$tmpzip" || echo "Failed to install Just Perfection"
+            gnome-extensions enable just-perfection-desktop@just-perfection || true
+            rm -f "$tmpzip"
+        else
+            echo "Could not find a compatible Just Perfection extension for GNOME $shell_ver"
+        fi
     # Tailscale QS
         git clone https://github.com/joaophi/tailscale-gnome-qs.git
-        cd tailscale-gnome-qs || exit
+        cd tailscale-gnome-qs || exit 1
         make build
         make install
-        cd "$builddir" || exit
+        cd "$builddir" || exit 1
         rm -rf tailscale-gnome-qs
-        sudo tailscale set --operator="$username"
+    # Pop Shell
+        sudo apt install -y nodejs npm libglib2.0-dev-bin
+        git clone --depth=1 https://github.com/pop-os/shell.git pop-os-shell
+        cd pop-os-shell || exit
+        git submodule update --init --recursive
+        make local-install || {
+            echo "Pop Shell build failed"
+            exit 1
+        }
+        if [ -d "$HOME/.local/share/gnome-shell/extensions/pop-shell@system76.com/schemas" ]; then
+            glib-compile-schemas "$HOME/.local/share/gnome-shell/extensions/pop-shell@system76.com/schemas"
+        fi
+        cd "$builddir" || exit
+        rm -rf pop-os-shell
+
 
 # Remove unwanted apps
     sudo apt remove gnome-terminal --purge -y

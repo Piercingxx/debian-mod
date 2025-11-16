@@ -71,13 +71,18 @@ flatpak update
     pipx install gnome-extensions-cli --system-site-packages
 
 # Nvim & Depends
-    sudo apt install neovim -y
+    # Neovim Nightly (AppImage)
+    echo "Installing Neovim nightly"
+    mkdir -p "$HOME/.local/bin"
+    curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage \
+        -o "$HOME/.local/bin/nvim"
+    chmod u+x "$HOME/.local/bin/nvim"
+    # Ensure ~/.local/bin is in PATH for future shells
+    if ! grep -q 'export PATH="$HOME/.local/bin:$PATH"' "$HOME/.bashrc"; then
+        echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+    fi
     sudo apt install lua5.4 -y
-    sudo apt install luarocks -y
     sudo apt install python3-pip -y
-    sudo npm install -g @mermaid-js/mermaid-cli
-    sudo npm install -g neovim
-    python3 -m pip install --user --upgrade pynvim
 
 # VSCode
     wget "https://vscode.download.prss.microsoft.com/dbazure/download/stable/e170252f762678dec6ca2cc69aba1570769a5d39/code_1.88.1-1712771838_amd64.deb"
