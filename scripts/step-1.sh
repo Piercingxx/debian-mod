@@ -95,8 +95,26 @@ builddir=$(pwd)
     sudo apt install gparted -y
     sudo apt install gh -y
     sudo apt install papirus-icon-theme -y
+    sudo apt install libtool -y
+    sudo apt install libtool-bin -y
+    sudo apt install autoconf -y
+    sudo apt install automake -y
+    sudo apt install cmake -y
+    sudo apt install g++ -y
+    sudo apt install pkg-config -y
+    sudo apt install libncurses5-dev -y
+    sudo apt install libncursesw5-dev -y
+    sudo apt install libtinfo-dev -y
+    sudo apt install libacl1-dev -y
+    sudo apt install libgpm-dev -y
+    sudo apt install libjemalloc-dev -y
+    sudo apt install libpython3-dev -y
+    sudo apt install libpython-dev -y
+    sudo apt install luajit -y
+    sudo apt install libluajit-5.1-dev -y
+    
 # Extras for yazi
-    sudo apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick -y
+    sudo apt install ffmpeg 7zip poppler-utils fd-find ripgrep fzf zoxide -y
 
 # Ensure Rust is installed
     if ! command_exists cargo; then
@@ -119,7 +137,6 @@ builddir=$(pwd)
     sudo rm FiraCode.zip Meslo.zip NerdFontsSymbolsOnly.zip
     sudo apt install fonts-font-awesome fonts-noto-color-emoji -y
     sudo apt install fonts-terminus -y
-    sudo apt install fonts-noto-color-emoji -y
 # Reload Font
     fc-cache -vf
     wait

@@ -70,7 +70,15 @@ flatpak update
     pipx install gnome-extensions-cli --system-site-packages
 
 # Nvim & Depends
-    sudo apt install neovim -y
+    git clone https://github.com/neovim/neovim.git
+    cd neovim || exit
+    make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/usr/local/
+    sudo make install
+    # Ensure /usr/local/bin is on PATH for all users
+    sudo tee /etc/profile.d/local-path.sh >/dev/null <<'EOF'
+export PATH="/usr/local/bin:$PATH"
+EOF
+    sudo chmod 644 /etc/profile.d/local-path.sh
     sudo apt install lua5.4 -y
     sudo apt install python3-pip -y
 
