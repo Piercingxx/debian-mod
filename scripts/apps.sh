@@ -44,6 +44,7 @@ flatpak update
     flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
     flatpak install flathub com.github.xournalpp.xournalpp -y
     sudo apt install ssh -y
+    sudo apt install fastfetch -y
 
 
 # Install yazi
