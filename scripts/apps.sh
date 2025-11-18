@@ -43,6 +43,7 @@ flatpak update
     flatpak install flathub org.gnome.meld -y
     flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
     flatpak install flathub com.github.xournalpp.xournalpp -y
+    sudo apt install ssh -y
 
 
 # Install yazi
@@ -65,6 +66,8 @@ flatpak update
 # Firewall
     sudo apt install ufw -y
     sudo ufw allow OpenSSH
+    sudo ufw allow SSH
+    sudo ufw enable
 
 # Install Gnome-extensions-cli
     pipx install gnome-extensions-cli --system-site-packages
