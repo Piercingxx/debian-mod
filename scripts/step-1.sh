@@ -125,6 +125,15 @@ builddir=$(pwd)
         source "$HOME/.cargo/env"
     fi
 
+# Install Brew
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # Add Brew to PATH
+    echo >> /home/droidian/.bashrc
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/droidian/.bashrc
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    sudo apt-get install build-essential -y
+    brew install gcc
+
 # Installing fonts
     echo "Installing Fonts"
     cd "$builddir" || exit
@@ -150,6 +159,9 @@ EOF
 # Finalizing graphical login
     sudo systemctl enable gdm3 --now
 
+# Install Gnome-extensions-cli
+    pipx install gnome-extensions-cli --system-site-packages
+
 # Extensions
     echo "Gnome Extensions"
         sudo apt install gnome-shell-extension-appindicator -y
@@ -159,7 +171,7 @@ EOF
         sudo apt install gnome-shell-extension-tiling-assistant -y
     # Nautilus Customization
         sudo apt install gnome-sushi -y
-        sudo apt install imagemagick nautilus-image-converter -y
+        sudo apt install imagemagick -y
         sudo apt install nautilus-admin -y
         sudo apt install gir1.2-gtk-4.0 -y
         git clone https://github.com/Stunkymonkey/nautilus-open-any-terminal.git

@@ -45,7 +45,7 @@ flatpak update
     flatpak install flathub com.github.xournalpp.xournalpp -y
     sudo apt install ssh -y
     sudo apt install fastfetch -y
-
+    sudo apt install w3m -y
 
 # Install yazi
     # Ensure new cargo environment for this shell
@@ -70,24 +70,23 @@ flatpak update
     sudo ufw allow SSH
     sudo ufw enable
 
-# Install Gnome-extensions-cli
-    pipx install gnome-extensions-cli --system-site-packages
-
 # Nvim & Depends
-    git clone https://github.com/neovim/neovim.git
-    cd neovim || exit
-    make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/usr/local/
-    sudo make install
-    # Ensure /usr/local/bin is on PATH for all users
-    sudo tee /etc/profile.d/local-path.sh >/dev/null <<'EOF'
-export PATH="/usr/local/bin:$PATH"
-EOF
-    sudo chmod 644 /etc/profile.d/local-path.sh
+    brew tap austinliuigi/brew-neovim-nightly https://github.com/austinliuigi/brew-neovim-nightly.git
+    brew install neovim-nightly
+#    git clone https://github.com/neovim/neovim.git
+#    cd neovim || exit
+#    make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/usr/local/
+#    sudo make install
+#    # Ensure /usr/local/bin is on PATH for all users
+#    sudo tee /etc/profile.d/local-path.sh >/dev/null <<'EOF'
+#export PATH="/usr/local/bin:$PATH"
+#EOF
+#    sudo chmod 644 /etc/profile.d/local-path.sh
     sudo apt install lua5.4 -y
     sudo apt install python3-pip -y
     sudo apt install chafa -y
     sudo apt install ripgrep -y
-
+    
 # VSCode
     wget "https://vscode.download.prss.microsoft.com/dbazure/download/stable/e170252f762678dec6ca2cc69aba1570769a5d39/code_1.88.1-1712771838_amd64.deb"
     wait
