@@ -36,6 +36,7 @@ builddir=$(pwd)
     sudo apt install network-manager-applet -y
     sudo apt install bluez -y
     sudo apt install blueman -y
+    sudo apt install polkit-kde-agent-1 -y
     sudo apt install libpixman-1-dev -y
     sudo apt install libpugixml-dev -y
     sudo apt install libjpeg-dev -y

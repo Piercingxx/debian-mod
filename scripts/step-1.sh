@@ -116,24 +116,6 @@ builddir=$(pwd)
 # Extras for yazi
     sudo apt install ffmpeg 7zip poppler-utils fd-find ripgrep fzf zoxide -y
 
-# Ensure Rust is installed
-    if ! command_exists cargo; then
-        echo -e "${YELLOW}Installing Rust toolchain…${NC}"
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-        rustup update
-        # Load the new cargo environment for this shell
-        source "$HOME/.cargo/env"
-    fi
-
-# Install Brew
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # Add Brew to PATH
-    echo >> /home/droidian/.bashrc
-    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/droidian/.bashrc
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    sudo apt-get install build-essential -y
-    brew install gcc
-
 # Installing fonts
     echo "Installing Fonts"
     cd "$builddir" || exit

@@ -41,7 +41,7 @@ flatpak update
     flatpak install --noninteractive flathub io.github.realmazharhussain.GdmSettings -y
     flatpak install flathub com.flashforge.FlashPrint -y
     flatpak install flathub org.gnome.meld -y
-    flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
+    #flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
     flatpak install flathub com.github.xournalpp.xournalpp -y
     sudo apt install ssh -y
     sudo apt install fastfetch -y
@@ -70,18 +70,20 @@ flatpak update
     sudo ufw allow SSH
     sudo ufw enable
 
-# Nvim & Depends
-    brew tap austinliuigi/brew-neovim-nightly https://github.com/austinliuigi/brew-neovim-nightly.git
-    brew install neovim-nightly
-#    git clone https://github.com/neovim/neovim.git
-#    cd neovim || exit
-#    make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/usr/local/
-#    sudo make install
-#    # Ensure /usr/local/bin is on PATH for all users
-#    sudo tee /etc/profile.d/local-path.sh >/dev/null <<'EOF'
-#export PATH="/usr/local/bin:$PATH"
-#EOF
-#    sudo chmod 644 /etc/profile.d/local-path.sh
+# Nvim Nightly & Depends
+    sudo apt install cmake ninja-build gettext unzip curl build-essential -y
+    git clone https://github.com/neovim/neovim.git
+    cd neovim || exit
+    git checkout nightly
+    make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/usr/local/
+    sudo make install
+    cd "$builddir" || exit
+    rm -rf neovim
+    # Ensure /usr/local/bin is on PATH for all users
+    sudo tee /etc/profile.d/local-path.sh >/dev/null <<'EOF'
+export PATH="/usr/local/bin:$PATH"
+EOF
+    sudo chmod 644 /etc/profile.d/local-path.sh
     sudo apt install lua5.4 -y
     sudo apt install python3-pip -y
     sudo apt install chafa -y
@@ -110,14 +112,15 @@ flatpak update
     rm protonvpn-beta-release_1.0.8_all.deb
 
 # Steam & Discord
-    # wget "https://steamcdn-a.akamaihd.net/client/installer/steam.deb"
-    # wait
-    # sudo dpkg -i steam.deb
-    # wait
-    # rm steam.deb
-    # # i386 is needed for steam to launch
-    # sudo dpkg --add-architecture i386
-    # flatpak install flathub com.discordapp.Discord -y
+    sudo dpkg --add-architecture i386
+    sudo apt update
+        wget "https://steamcdn-a.akamaihd.net/client/installer/steam.deb"
+        wait
+        sudo dpkg -i steam.deb || sudo apt -f install -y
+        wait
+        rm steam.deb
+    # Discord via Flatpak
+    flatpak install flathub com.discordapp.Discord -y
 
 # Ulauncher
     gpg --keyserver keyserver.ubuntu.com --recv 0xfaf1020699503176
