@@ -109,6 +109,8 @@ while true; do
             # Clean Up
                 rm -rf piercing-dots
             echo -e "${GREEN}PiercingXX Gnome Customizations Applied successfully!${NC}"
+            sudo systemctl enable gdm3 --now
+            wait
             msg_box "System will reboot now."
             sudo reboot
             ;;
