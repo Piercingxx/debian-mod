@@ -150,6 +150,19 @@ builddir=$(pwd)
     fc-cache -vf
     wait
 
+# Cursor theme - Nordzy built from source
+    printf "${NOTE} Installing Nordzy-cursors (optional, press Ctrl+C to skip)...\n"
+    rm -rf Nordzy-cursors 2>/dev/null || true
+    if timeout 10 git clone --depth 1 --recurse-submodules=no https://github.com/Taiko2k/Nordzy-cursors.git 2>/dev/null; then
+        cd Nordzy-cursors || exit 1
+        mkdir -p ~/.local/share/icons
+        cp -r cursors/* ~/.local/share/icons/ 2>/dev/null || true
+        printf "${OK} Nordzy-cursors installed to ~/.local/share/icons\n"
+        cd ..
+    else
+        printf "${INFO} Nordzy-cursors clone skipped or failed. Using system default cursor theme.\n"
+    fi
+
 # Add GDM Banner Message
 sudo tee -a /etc/gdm3/greeter.dconf-defaults > /dev/null <<EOF
 # - Show a login welcome message
