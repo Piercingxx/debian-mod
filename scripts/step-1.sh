@@ -157,7 +157,7 @@ banner-message-enable=true
 banner-message-text='Hello Handsome'
 EOF
 # Finalizing graphical login
-    sudo systemctl enable gdm3 --now
+    sudo systemctl enable gdm3
 
 # Install Gnome-extensions-cli
     pipx install gnome-extensions-cli --system-site-packages
