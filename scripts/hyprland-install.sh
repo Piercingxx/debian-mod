@@ -4,6 +4,19 @@
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
+# Version pins for Hyprland stack
+hyprutils_version="v0.11.0"
+hyprlang_version="v0.6.7"
+hyprland_protocols_version="v0.7.0"
+hyprwayland_scanner_version="v0.4.5"
+hyprlock_version="v0.5.1"
+hypridle_version="v0.3.1"
+hyprgraphics_version="v0.2.0"
+hyprpaper_version="v0.7.6"
+aquamarine_version="v0.4.0"
+hyprcursor_version="v0.1.8"
+hyprland_version="v0.43.0"
+
 # Update
     # Detect distribution
         if [ -f /etc/os-release ]; then
@@ -168,9 +181,9 @@ builddir=$(pwd)
     fi
 
 # Build hyprgraphics
-    printf "${NOTE} Building and installing hyprgraphics...\n"
+    printf "${NOTE} Building and installing hyprgraphics ${hyprgraphics_version}...\n"
     rm -rf hyprgraphics 2>/dev/null || true
-    if git clone --depth 1 --recursive https://github.com/hyprwm/hyprgraphics.git; then
+    if git clone --depth 1 --recursive -b "${hyprgraphics_version}" https://github.com/hyprwm/hyprgraphics.git; then
         cd hyprgraphics || exit 1
         cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -B ./build
         cmake --build ./build --config Release -j"$(nproc 2>/dev/null || getconf _NPROCESSORS_CONF)"
@@ -204,9 +217,9 @@ builddir=$(pwd)
     fi
 
 # Build aquamarine
-    printf "${NOTE} Building and installing aquamarine...\n"
+    printf "${NOTE} Building and installing aquamarine ${aquamarine_version}...\n"
     rm -rf aquamarine 2>/dev/null || true
-    if git clone --depth 1 --recursive https://github.com/hyprwm/aquamarine.git; then
+    if git clone --depth 1 --recursive -b "${aquamarine_version}" https://github.com/hyprwm/aquamarine.git; then
         cd aquamarine || exit 1
         cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -B ./build
         cmake --build ./build --config Release -j"$(nproc 2>/dev/null || getconf _NPROCESSORS_CONF)"
@@ -223,9 +236,9 @@ builddir=$(pwd)
     fi
 
 # Build hyprcursor
-    printf "${NOTE} Building and installing hyprcursor...\n"
+    printf "${NOTE} Building and installing hyprcursor ${hyprcursor_version}...\n"
     rm -rf hyprcursor 2>/dev/null || true
-    if git clone --depth 1 --recursive https://github.com/hyprwm/hyprcursor.git; then
+    if git clone --depth 1 --recursive -b "${hyprcursor_version}" https://github.com/hyprwm/hyprcursor.git; then
         cd hyprcursor || exit 1
         cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -B ./build
         cmake --build ./build --config Release -j"$(nproc 2>/dev/null || getconf _NPROCESSORS_CONF)"
