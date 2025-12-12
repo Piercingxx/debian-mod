@@ -9,7 +9,7 @@ Automates core package installation, GPU drivers, Surface kernel modules, Hyprla
 
 - Installs GNOME, developer tools, and essential apps
 - Optional NVIDIA driver and Microsoft Surface kernel support
-- Hyprland Wayland session setup
+- Hyprland and dependencies built from scratch
 - Applies [Piercing‑Dots](https://github.com/PiercingXX/Piercing-Dots) dotfiles and customizations
 - Firewall configuration with UFW
 - Flatpak integration and core desktop applications
