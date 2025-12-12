@@ -97,11 +97,15 @@ EOF
     rm code_1.88.1-1712771838_amd64.deb
 
 # Synology Drive - Do not use the flatpak, it sucks
-    wget "https://global.download.synology.com/download/Utility/SynologyDriveClient/3.4.0-15724/Ubuntu/Installer/synology-drive-client-15724.x86_64.deb"
+    synology_drive_version="4.0.1-17885"
+    synology_drive_build="${synology_drive_version##*-}"
+    synology_drive_url="https://global.download.synology.com/download/Utility/SynologyDriveClient/${synology_drive_version}/Ubuntu/Installer"
+    synology_drive_pkg="synology-drive-client-${synology_drive_build}.x86_64.deb"
+    wget "${synology_drive_url}/${synology_drive_pkg}"
     wait
-    sudo dpkg -i synology-drive-client-15724.x86_64.deb
+    sudo dpkg -i "${synology_drive_pkg}"
     wait
-    rm synology-drive-client-15724.x86_64.deb
+    rm "${synology_drive_pkg}"
     sudo apt --fix-broken install -y
 
 # Proton VPN

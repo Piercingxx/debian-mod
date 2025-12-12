@@ -21,7 +21,7 @@ builddir=$(pwd)
     sudo apt install libpam0g-dev -y
     sudo apt install libgbm-dev -y
     sudo apt install libdrm-dev -y
-    sudo apt install libmagic-dev-y
+    sudo apt install libmagic-dev -y
     sudo apt install rofi -y
     sudo apt install fuzzel -y
     sudo apt install waybar -y
@@ -43,7 +43,7 @@ builddir=$(pwd)
     sudo apt install libwebp-dev -y
     sudo apt install librsvg2-dev -y
     sudo apt install libgles2-mesa-dev -y
-    sudo apt install libgles-dev-y
+    sudo apt install libgles-dev -y
     sudo apt install libseat-dev -y
     sudo apt install libinput-dev -y
     sudo apt install libudev-dev -y
