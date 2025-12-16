@@ -132,6 +132,12 @@ builddir=$(pwd)
     fc-cache -vf
     wait
 
+# Install Gum
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
+    sudo apt update && sudo apt install gum
+
 # Cursor theme - Nordzy built from source
     printf "${NOTE} Installing Nordzy-cursors (optional, press Ctrl+C to skip)...\n"
     rm -rf Nordzy-cursors 2>/dev/null || true
