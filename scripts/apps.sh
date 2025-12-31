@@ -70,6 +70,7 @@ flatpak update
     sudo ufw allow SSH
     sudo ufw enable
 
+
 # Nvim Nightly & Depends
     sudo apt install cmake ninja-build gettext unzip curl build-essential -y
     git clone https://github.com/neovim/neovim.git
@@ -88,7 +89,7 @@ EOF
     sudo apt install python3-pip -y
     sudo apt install chafa -y
     sudo apt install ripgrep -y
-    
+
 # VSCode
     wget "https://vscode.download.prss.microsoft.com/dbazure/download/stable/e170252f762678dec6ca2cc69aba1570769a5d39/code_1.88.1-1712771838_amd64.deb"
     wait

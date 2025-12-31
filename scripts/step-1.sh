@@ -112,7 +112,12 @@ builddir=$(pwd)
     sudo apt install libpython-dev -y
     sudo apt install luajit -y
     sudo apt install libluajit-5.1-dev -y
-    
+    sudo apt install tmux -y
+    sudo apt install sshpass -y
+    sudo apt install htop -y
+    sudo apt install nvtop -y
+    sudo apt install lnav -y
+
 # Extras for yazi
     sudo apt install ffmpeg 7zip poppler-utils fd-find ripgrep fzf zoxide -y
 
