@@ -58,6 +58,7 @@ function menu() {
         "Install"                               "Install PiercingXX Debian" \
         "Nvidia Driver"                         "Install Nvidia Drivers (Do not install on a Surface Device)" \
         "Optional Surface Kernel"               "Microsoft Surface Kernel" \
+    "Install Printers"                      "Install Canon D530 or Omezizy printer support" \
         "Window Managers"                       "Install Hyprland, Sway, i3, or bspwm" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
@@ -72,6 +73,14 @@ function window_manager_menu() {
         "bspwm"                                "Install bspwm & all dependencies" OFF 3>&1 1>&2 2>&3
 }
 
+function printer_menu() {
+    whiptail --backtitle "GitHub.com/PiercingXX" --title "Printers" \
+        --menu "Select a printer to configure:" 0 0 0 \
+        "Canon D530"                            "Install the Canon D530 queue" \
+        "Omezizy"                               "Install the Omezizy/XPrinter label queue" \
+        "Back"                                  "Return to the main menu" 3>&1 1>&2 2>&3
+}
+
 run_wm_install_script() {
     local label="$1"
     local script_name="$2"
@@ -82,6 +91,18 @@ run_wm_install_script() {
     ./$script_name
     cd "$builddir" || exit
     echo -e "${GREEN}${label} installed successfully!${NC}"
+}
+
+run_printer_install_script() {
+    local label="$1"
+    local target="$2"
+
+    echo -e "${YELLOW}${label}...${NC}"
+    cd scripts || exit
+    chmod u+x install-printers.sh
+    sudo ./install-printers.sh "$target"
+    cd "$builddir" || exit
+    echo -e "${GREEN}${label} completed successfully!${NC}"
 }
 
 install_selected_window_managers() {
@@ -114,6 +135,20 @@ prompt_install_window_managers_after_install() {
     if whiptail --backtitle "GitHub.com/PiercingXX" --title "Window Managers" --yesno "Install window managers before reboot?" 0 0; then
         install_selected_window_managers
     fi
+}
+
+install_selected_printer() {
+    local printer_choice
+
+    printer_choice=$(printer_menu) || printer_choice=""
+    case "$printer_choice" in
+        "Canon D530")
+            run_printer_install_script "Installing Canon D530 printer" "canon-d530"
+            ;;
+        "Omezizy")
+            run_printer_install_script "Installing Omezizy label printer" "omezizy"
+            ;;
+    esac
 }
 # Main menu loop
 while true; do
@@ -201,6 +236,9 @@ while true; do
                 chmod u+x Surface.sh
                 sudo ./Surface.sh
                 cd "$builddir" || exit
+            ;;
+        "Install Printers")
+            install_selected_printer
             ;;
         "Window Managers")
             install_selected_window_managers

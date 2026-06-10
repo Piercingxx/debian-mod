@@ -43,6 +43,7 @@ Options include system install, NVIDIA drivers, Surface kernel, Hyprland, and re
 | `scripts/Surface.sh`  | Installs Microsoft Surface kernel       |
 | `scripts/hyprland-install.sh` | Installs Hyprland and dependencies |
 | `scripts/apps.sh`     | Installs core desktop applications      |
+| `scripts/install-printers.sh` | Configures Canon D530 or Omezizy label printers |
 
 ---
 
