@@ -59,7 +59,7 @@ function menu() {
         "Nvidia Driver"                         "Install Nvidia Drivers (Do not install on a Surface Device)" \
         "Optional Surface Kernel"               "Microsoft Surface Kernel" \
     "Install Printers"                      "Install Canon D530 or Omezizy printer support" \
-        "Window Managers"                       "Install Hyprland, Sway, i3, or bspwm" \
+        "Window Managers"                       "Install Awesome, Hyprland, Sway, i3, or bspwm" \
         "Reboot System"                         "Reboot the system" \
         "Exit"                                  "Exit the script" 3>&1 1>&2 2>&3
 }
@@ -67,6 +67,7 @@ function menu() {
 function window_manager_menu() {
     whiptail --backtitle "GitHub.com/PiercingXX" --title "Window Managers" \
         --checklist "Select one or more window managers to install:" 0 0 0 \
+        "Awesome"                              "Install Awesome & all dependencies" OFF \
         "Hyprland"                             "Install Hyprland & all dependencies" OFF \
         "Sway"                                 "Install Sway & all dependencies" OFF \
         "i3"                                   "Install i3 & all dependencies" OFF \
@@ -115,6 +116,9 @@ install_selected_window_managers() {
     for wm_choice in $wm_choices; do
         wm_choice=${wm_choice//\"/}
         case $wm_choice in
+            "Awesome")
+                run_wm_install_script "Awesome" "awesome-install.sh"
+                ;;
             "Hyprland")
                 run_wm_install_script "Hyprland" "hyprland-install.sh"
                 ;;
