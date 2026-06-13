@@ -45,4 +45,7 @@ sudo apt install -y acpi upower
 echo "Installing compatibility wrappers for missing WM helpers..."
 bash "$(dirname "$0")/wm-compat.sh"
 
+# Keep one network manager active across TTY and WMs.
+bash "$(dirname "$0")/network-manager-setup.sh"
+
 echo -e "\nAll i3 packages installed successfully!"

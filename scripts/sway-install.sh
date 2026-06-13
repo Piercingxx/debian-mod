@@ -48,4 +48,7 @@ sudo apt install -y dconf-cli
 echo "Installing compatibility wrappers for missing WM helpers..."
 bash "$(dirname "$0")/wm-compat.sh"
 
+# Keep one network manager active across TTY and WMs.
+bash "$(dirname "$0")/network-manager-setup.sh"
+
 echo -e "\nAll Sway packages installed successfully!"

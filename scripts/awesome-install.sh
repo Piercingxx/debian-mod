@@ -35,4 +35,7 @@ sudo apt install -y policykit-1-gnome gnome-keyring network-manager network-mana
 echo "Installing compatibility wrappers for missing WM helpers..."
 bash "$(dirname "$0")/wm-compat.sh"
 
+# Keep one network manager active across TTY and WMs.
+bash "$(dirname "$0")/network-manager-setup.sh"
+
 echo -e "\nAll Awesome packages installed successfully!"

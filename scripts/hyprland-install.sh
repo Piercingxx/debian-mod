@@ -52,6 +52,7 @@ hyprland_version="v0.43.0"
     sudo apt install jq -y
     sudo apt install libnotify-bin -y
     sudo apt install easyeffects -y
+    sudo apt install network-manager -y
     sudo apt install network-manager-gnome -y
     sudo apt install bluez -y
     sudo apt install blueman -y
@@ -80,6 +81,8 @@ hyprland_version="v0.43.0"
     sudo apt install libxcb-errors-dev -y
 
     bash "$(dirname "$0")/wm-compat.sh"
+    # Keep one network manager active across TTY and WMs.
+    bash "$(dirname "$0")/network-manager-setup.sh"
 
 # Build hyprutils from source (required by Hyprland)
     printf "${NOTE} Building and installing hyprutils v0.11.0...\n"
